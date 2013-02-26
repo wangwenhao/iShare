@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  iShare
 //
-//  Created by Bryant on 2/19/13.
+//  Created by Wang Wen Hao on 2/19/13.
 //  Copyright (c) 2013 NCS. All rights reserved.
 //
 
@@ -13,11 +13,18 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize mainViewController = _mainViewController;
+@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    self.mainViewController = [[MainViewController alloc]initWithNibName:@"MainView" bundle:nil];
+    self.mainViewController.title = @"iShare";
+    self.navigationController = [[UINavigationController alloc]initWithRootViewController:self.mainViewController];
+    self.window.rootViewController = self.navigationController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
