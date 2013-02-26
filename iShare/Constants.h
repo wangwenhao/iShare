@@ -22,7 +22,7 @@
 #define WinLotteryIndicator @"winIndicator"
 #define SessionInfo @"session"
 
-//UserDefault Keys -- Added by Wen Hao
+//UserDefault Keys -- Added by Wang Wen Hao
 #define kEnabledSound           @"enabled_sound"
 #define kEnabledVibrate         @"enabled_vibrate"
 #define kSliderAwardCount       @"slider_awardCount"
