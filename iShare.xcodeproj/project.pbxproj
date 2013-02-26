@@ -10,6 +10,7 @@
 		B53970C116DCE1FE00CE490C /* DataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970BE16DCE04200CE490C /* DataHelper.m */; };
 		B53970C216DCE21500CE490C /* SessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970B916DCE00200CE490C /* SessionModel.m */; };
 		B53970C316DCE21500CE490C /* AudienceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970BB16DCE03000CE490C /* AudienceModel.m */; };
+		B53970C616DCE6F200CE490C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B53970C516DCE6F200CE490C /* Settings.bundle */; };
 		B55F8D5716D3ADB200870665 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5616D3ADB200870665 /* UIKit.framework */; };
 		B55F8D5916D3ADB200870665 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5816D3ADB200870665 /* Foundation.framework */; };
 		B55F8D5B16D3ADB200870665 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5A16D3ADB200870665 /* CoreGraphics.framework */; };
@@ -53,6 +54,7 @@
 		B53970BC16DCE04200CE490C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B53970BD16DCE04200CE490C /* DataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataHelper.h; sourceTree = "<group>"; };
 		B53970BE16DCE04200CE490C /* DataHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataHelper.m; sourceTree = "<group>"; };
+		B53970C516DCE6F200CE490C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B55F8D5316D3ADB200870665 /* iShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55F8D5616D3ADB200870665 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B55F8D5816D3ADB200870665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -227,6 +229,7 @@
 		B55F8D5F16D3ADB200870665 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B53970C516DCE6F200CE490C /* Settings.bundle */,
 				B55F8D6016D3ADB200870665 /* iShare-Info.plist */,
 				B55F8D6116D3ADB200870665 /* InfoPlist.strings */,
 				B55F8D6416D3ADB200870665 /* main.m */,
@@ -367,6 +370,7 @@
 				B5EF96E016DB8A6000C4D8CB /* SessionScanView.xib in Resources */,
 				B5D9666516DB9BD2009F1204 /* CheckinScanView.xib in Resources */,
 				B5D9666B16DBAA38009F1204 /* da.wav in Resources */,
+				B53970C616DCE6F200CE490C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

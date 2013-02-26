@@ -10,5 +10,9 @@
 
 @interface SettingViewController : UITableViewController
 
+@property (nonatomic, strong) UILabel *awardCount;
+@property (nonatomic, strong) UISlider *slider;
+
+-(IBAction)sliderValueChanged:(id)sender;
 
 @end

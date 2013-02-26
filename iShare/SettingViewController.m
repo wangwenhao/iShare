@@ -7,12 +7,16 @@
 //
 
 #import "SettingViewController.h"
+#import "Constants.h"
 
 @interface SettingViewController ()
 
 @end
 
 @implementation SettingViewController
+
+@synthesize awardCount;
+@synthesize slider;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,14 +56,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 2)
-    {
-        return 2;
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 2;
+            break;
+        default:
+            break;
     }
-    else
-    {
-        return 1;
-    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,17 +83,40 @@
     switch (indexPath.section) {
         case 0:
         {
-            cell.textLabel.text = @"中奖人数";
-            UISlider *slider = [[UISlider alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 0.0f)];
-            slider.minimumValue = 1.0f;
-            slider.maximumValue = 10.0f;
-            slider.value = 2.0f;
-            cell.accessoryView = slider;
+            switch (indexPath.row) {
+                case 0:
+                {
+                    slider = [[UISlider alloc]initWithFrame:CGRectMake(cell.frame.origin.x + 20, 0.0f, cell.frame.size.width - 40, 0.0f)];
+                    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    slider.minimumValue = 1.0f;
+                    slider.maximumValue = 10.0f;
+                    
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    
+                    slider.value = [[defaults objectForKey:kSliderAwardCount]floatValue];
+                    cell.accessoryView = slider;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                case 1:
+                {
+                    cell.textLabel.text = @"中奖人数";
+                    awardCount = [[UILabel alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
+                    awardCount.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.0f];
+                    awardCount.text = [NSString stringWithFormat:@"%d", (int)slider.value];
+                    cell.accessoryView = awardCount;
+                    break;
+                }
+                default:
+                    break;
+            }
             break;
         }
         case 1:
+        {
             cell.textLabel.text = @"点击删除两个月前的课程信息";
             break;
+        }
         case 2:
         {
             switch (indexPath.row) {
@@ -103,6 +136,13 @@
     }
     
     return cell;
+}
+
+-(void)sliderValueChanged:(id)sender
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithFloat:slider.value] forKey:kSliderAwardCount];
+    awardCount.text = [NSString stringWithFormat:@"%d", (int)slider.value];
 }
 
 /*

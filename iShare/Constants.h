@@ -21,3 +21,8 @@
 #define UserID @"userID"
 #define WinLotteryIndicator @"winIndicator"
 #define SessionInfo @"session"
+
+//UserDefault Keys -- Added by Wen Hao
+#define kEnabledSound           @"enabled_sound"
+#define kEnabledVibrate         @"enabled_vibrate"
+#define kSliderAwardCount       @"slider_awardCount"
