@@ -12,11 +12,14 @@
 
 @implementation Session
 
+@synthesize departmentName;
 @dynamic endTime;
 @dynamic lecturer;
+@dynamic location;
 @dynamic scanedTime;
 @dynamic sessionID;
 @dynamic sessionName;
+@dynamic sessionDesc;
 @dynamic startTime;
 @dynamic status;
 @dynamic audiences;

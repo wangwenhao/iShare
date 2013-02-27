@@ -17,4 +17,6 @@
 
 @property (nonatomic, strong) ZBarReaderView *reader;
 
+-(BOOL) isValidTicketJson:(NSDictionary *)JSONDic;
+
 @end

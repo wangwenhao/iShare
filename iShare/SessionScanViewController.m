@@ -7,6 +7,7 @@
 //
 
 #import "SessionScanViewController.h"
+#import "JSONKit.h"
 
 @interface SessionScanViewController ()
 
@@ -36,8 +37,6 @@
     self.title = @"选课";
     // Do any additional setup after loading the view from its nib.
     
-    // ADD: present a barcode reader that scans from the camera feed
-    //ZBarReaderViewController *reader = [ZBarReaderViewController new];
     ZBarImageScanner *scanner = [[ZBarImageScanner alloc]init];
     [scanner setSymbology: ZBAR_I25
                    config: ZBAR_CFG_ENABLE
@@ -45,45 +44,68 @@
 
     reader = [[ZBarReaderView alloc]initWithImageScanner:scanner];
     
-//    for (UIView *temp in [reader.view subviews]) {
-//        for (UIView *view in [temp subviews]) {
-//            if ([view isKindOfClass:[UIToolbar class]]) {
-//                for (UIView *button in [view subviews]) {
-//                    if([button isKindOfClass:[UIButton class]] && ((UIButton *)button).buttonType == UIButtonTypeInfoLight)
-//                    {
-//                        [button removeFromSuperview];
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     reader.readerDelegate = self;
-//    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-    
-//    ZBarImageScanner *scanner = reader.scanner;
-    
-//    [scanner setSymbology: ZBAR_I25
-//                   config: ZBAR_CFG_ENABLE
-//                       to: 0];
     
     [self.view addSubview:reader];
     
     [reader start];
-    // present and release the controller
-    //[self presentViewController:reader animated:YES completion:^(void){}];
 }
 
 -(void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
 {
-    NSURL *filePath = [[NSBundle mainBundle]URLForResource:@"da" withExtension:@"wav"];
-    AudioServicesCreateSystemSoundID(CFBridgingRetain(filePath), &soundID);
-    AudioServicesPlaySystemSound(soundID);
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([(NSNumber *)[defaults objectForKey:@"enabled_sound"] boolValue]) {
+        NSURL *filePath = [[NSBundle mainBundle]URLForResource:@"da" withExtension:@"wav"];
+        AudioServicesCreateSystemSoundID(CFBridgingRetain(filePath), &soundID);
+        AudioServicesPlaySystemSound(soundID);
+    }
+    
+    if ([(NSNumber *)[defaults objectForKey:@"enabled_vibrate"] boolValue]) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+    // read the firse symbol
     for (ZBarSymbol *symbol in symbols) {
         NSLog(@"%@", symbol.data);
         [reader stop];
+        
+        //TODO: Hardcode for testing
+        NSString *jsonString = @"{\"sessionid\":1,\"sessionname\":\"session 1\",\"sessiondesc\":\"this session is for testing\",\"starttime\":\"2013/12/25 13:00\",\"endtime\":\"2013/12/25 15:00\", \"lecture\":\"peter\",\"location\":\"7F Cambridge\",\"deptName\":\"34103001\"}";
+        
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *resultDic = [jsonData objectFromJSONData];
+        
+        if (![self isValidSessionJson:resultDic]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"请扫描正确的二维码" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+        
+        //TODO: save the session info.
+        NSLog(@"%@", resultDic);
+        
+        break;
     }
+}
+
+-(BOOL)isValidSessionJson:(NSDictionary *)JSONDic
+{
+    NSArray *key = [JSONDic allKeys];
+    if ([key count] != 8) return NO;
+    if (![key containsObject:@"sessionid"]) return NO;
+    if (![key containsObject:@"sessionname"]) return NO;
+    if (![key containsObject:@"sessiondesc"]) return NO;
+    if (![key containsObject:@"starttime"]) return NO;
+    if (![key containsObject:@"endtime"]) return NO;
+    if (![key containsObject:@"lecture"]) return NO;
+    if (![key containsObject:@"location"]) return NO;
+    if (![key containsObject:@"deptName"]) return NO;
+
+    return YES;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [reader start];
 }
 
 - (void)didReceiveMemoryWarning

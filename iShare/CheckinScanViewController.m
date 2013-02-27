@@ -7,6 +7,8 @@
 //
 
 #import "CheckinScanViewController.h"
+#import "JSONKit.h"
+#import "Constants.h"
 
 @interface CheckinScanViewController ()
 
@@ -51,14 +53,50 @@
 
 -(void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
 {
-    NSURL *filePath = [[NSBundle mainBundle]URLForResource:@"da" withExtension:@"wav"];
-    AudioServicesCreateSystemSoundID(CFBridgingRetain(filePath), &soundID);
-    AudioServicesPlaySystemSound(soundID);
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([(NSNumber *)[defaults objectForKey:@"enabled_sound"] boolValue]) {
+        NSURL *filePath = [[NSBundle mainBundle]URLForResource:@"da" withExtension:@"wav"];
+        AudioServicesCreateSystemSoundID(CFBridgingRetain(filePath), &soundID);
+        AudioServicesPlaySystemSound(soundID);
+    }
+    
+    if ([(NSNumber *)[defaults objectForKey:@"enabled_vibrate"] boolValue]) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+    
     for (ZBarSymbol *symbol in symbols) {
         NSLog(@"%@", symbol.data);
         [reader stop];
+        
+        //TODO: Hardcode for testing
+        NSString *jsonString = @"{\"sessionid\":1,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
+        
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *resultDic = [jsonData objectFromJSONData];
+        
+        if (![self isValidTicketJson:resultDic]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"请扫描正确的二维码" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+        
+        //TODO: save the ticket info.
+        NSLog(@"%@", resultDic);
+        
+        break;
     }
+}
+
+-(BOOL)isValidTicketJson:(NSDictionary *)JSONDic
+{
+    NSArray *key = [JSONDic allKeys];
+    if ([key count] != 4) return NO;
+    if (![key containsObject:@"sessionid"]) return NO;
+    if (![key containsObject:@"userid"]) return NO;
+    if (![key containsObject:@"staffid"]) return NO;
+    if (![key containsObject:@"staffname"]) return NO;
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

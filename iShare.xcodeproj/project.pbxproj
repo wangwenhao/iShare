@@ -33,6 +33,7 @@
 		B5895A2616D64D450073FAE6 /* SessionHistoryListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5895A2416D64D450073FAE6 /* SessionHistoryListView.xib */; };
 		B5895A2A16D65BE90073FAE6 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5895A2816D65BE90073FAE6 /* SettingViewController.m */; };
 		B5895A2B16D65BE90073FAE6 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5895A2916D65BE90073FAE6 /* SettingView.xib */; };
+		B5B7E4F116DE32FF00DBB201 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B7E4F016DE32FE00DBB201 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B5D9666416DB9BD2009F1204 /* CheckinScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */; };
 		B5D9666516DB9BD2009F1204 /* CheckinScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */; };
 		B5D9666916DBA78B009F1204 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D9666816DBA78B009F1204 /* AudioToolbox.framework */; };
@@ -104,6 +105,8 @@
 		B5895A2716D65BE90073FAE6 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		B5895A2816D65BE90073FAE6 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		B5895A2916D65BE90073FAE6 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
+		B5B7E4EF16DE32FE00DBB201 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		B5B7E4F016DE32FE00DBB201 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		B5D9666116DB9BD2009F1204 /* CheckinScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinScanViewController.h; sourceTree = "<group>"; };
 		B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinScanViewController.m; sourceTree = "<group>"; };
 		B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckinScanView.xib; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 		B55F8D5E16D3ADB200870665 /* iShare */ = {
 			isa = PBXGroup;
 			children = (
+				B5B7E4F216DE330400DBB201 /* JSONKit */,
 				B53970C416DCE49600CE490C /* DataModels */,
 				B53970B716DCDE2700CE490C /* Resources */,
 				B58959FF16D644DD0073FAE6 /* ZBarSDK */,
@@ -305,6 +309,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		B5B7E4F216DE330400DBB201 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				B5B7E4EF16DE32FE00DBB201 /* JSONKit.h */,
+				B5B7E4F016DE32FE00DBB201 /* JSONKit.m */,
+			);
+			name = JSONKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -392,6 +405,7 @@
 				B5895A2A16D65BE90073FAE6 /* SettingViewController.m in Sources */,
 				B5EF96DF16DB8A6000C4D8CB /* SessionScanViewController.m in Sources */,
 				B5D9666416DB9BD2009F1204 /* CheckinScanViewController.m in Sources */,
+				B5B7E4F116DE32FF00DBB201 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

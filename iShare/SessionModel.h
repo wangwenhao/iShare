@@ -13,11 +13,14 @@
 
 @interface Session: NSManagedObject
 
+@property (nonatomic, retain) NSString * departmentName;
 @property (nonatomic, retain) NSDate * endTime;
 @property (nonatomic, retain) NSString * lecturer;
+@property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSDate * scanedTime;
 @property (nonatomic, retain) NSNumber * sessionID;
 @property (nonatomic, retain) NSString * sessionName;
+@property (nonatomic, retain) NSString * sessionDesc;
 @property (nonatomic, retain) NSDate * startTime;
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSSet *audiences;

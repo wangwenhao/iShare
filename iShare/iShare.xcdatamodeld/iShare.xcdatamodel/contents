@@ -12,9 +12,12 @@
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="audiences" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="Session" syncable="YES">
+        <attribute name="departmentName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="lecturer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scanedTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sessionDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sessionID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="sessionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -23,6 +26,6 @@
     </entity>
     <elements>
         <element name="Audience" positionX="-621" positionY="-243" width="128" height="178"/>
-        <element name="Session" positionX="-405" positionY="-252" width="128" height="163"/>
+        <element name="Session" positionX="-938" positionY="-280" width="128" height="208"/>
     </elements>
 </model>
