@@ -28,6 +28,8 @@
         aModel.userID = userId;
         aModel.winIndicator = [NSNumber numberWithInt:0];
         aModel.session = sModel;
+        
+        [self saveContext:context];
     }
     
     return aModel;
@@ -53,7 +55,7 @@
     }
     
     return aModel;
-
+    
 }
 
 + (bool) updateAudienceWithAudienceId:(NSNumber *)aId andWinLottery:(NSNumber *)winStatus inContext:(NSManagedObjectContext *)context{
@@ -61,6 +63,7 @@
     
     if(aModel != nil){
         aModel.winIndicator = winStatus;
+        [self saveContext:context];
         return YES;
     }else{
         NSLog(@"Can't find the Audience with AudienceId=%@",[aId stringValue]);
@@ -68,42 +71,55 @@
     }
 }
 
-+ (Session *) scannedInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime andStatus:(NSString *)status inContext:(NSManagedObjectContext *)context{
+
++ (Session *) scannedInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime andStatus:(NSString *)status inContext:(NSManagedObjectContext *)context{
     
     Session *sModel = [self getSessionForID:sessionId inContext:context];
+    
     if (sModel != nil) {
         NSString *sValue = [sessionId stringValue];
-        NSLog(@"already exist the session with SessionId= %@", sValue);
-	    abort();
+        NSLog(@"already exist the session with SessionId= %@, just return the session from context.", sValue);
+	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = sessionId;
+        sModel.sessionDesc = sDesc;
+        sModel.location=location;
+        sModel.departmentName = deptName;
         sModel.scanedTime = [NSDate date];
         sModel.sessionName = sessionName;
         sModel.lecturer = lecturer;
         sModel.startTime = startTime;
         sModel.endTime = endTime;
         sModel.status = status;
+        
+        [self saveContext:context];
     }
     
     return sModel;
 }
 
-+ (Session *) keyInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime inContext:(NSManagedObjectContext *)context{
++ (Session *) keyInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime inContext:(NSManagedObjectContext *)context{
+    
     Session *sModel = [self getSessionForID:sessionId inContext:context];
+    
     if (sModel != nil) {
         NSString *sValue = [sessionId stringValue];
-        NSLog(@"already exist the session with SessionId= %@", sValue);
-	    abort();
+        NSLog(@"already exist the session with SessionId= %@,just return the session from context.", sValue);
+	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = sessionId;
+        sModel.sessionDesc = sDesc;
+        sModel.location=location;
+        sModel.departmentName = deptName;
         sModel.scanedTime = [NSDate date];
         sModel.sessionName = sessionName;
         sModel.lecturer = lecturer;
         sModel.startTime = startTime;
         sModel.endTime = endTime;
         sModel.status = @"Open";
+        [self saveContext:context];
     }
     
     return sModel;
@@ -200,6 +216,19 @@
     
     //[query release];//todo: need check release
     return aModel;
+}
+
++(void) saveContext:(NSManagedObjectContext *)context{
+    NSError *error;
+    if (![context save:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 @end
