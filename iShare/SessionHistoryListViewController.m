@@ -39,15 +39,12 @@
         NSLog(@"After managedObjectContext: %@",  _managedObjectContext);
     }
     
-    Session *sModel1 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:1] andSessionName:@"Session A" andSessionDesc:@"Test Session A." andLocation:@"7F Cambridge" andDeptName:@"DS1" andLecturer:@"Professor A" andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:20000.0] andStatus:@"Open" inContext:_managedObjectContext];
+    session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
+    //Session *sModel1 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:1] andSessionName:@"Session A" andSessionDesc:@"Test Session A." andLocation:@"7F Cambridge" andDeptName:@"DS1" andLecturer:@"Professor A" andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:20000.0] andStatus:@"Open" inContext:_managedObjectContext];    
+    //Session *sModel2 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:2] andSessionName:@"Session B" andSessionDesc:@"Test Session B." andLocation:@"8F Oxford" andDeptName:@"HR" andLecturer:@"Professor B" andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:12000.0] andStatus:@"Open" inContext:_managedObjectContext];    
+    //Session *sModel3 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:3] andSessionName:@"Session C" andSessionDesc:@"Test Session C." andLocation:@"9F Havard" andDeptName:@"34103001" andLecturer:@"Professor C"  andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:50000.0] andStatus:@"Open" inContext:_managedObjectContext];
     
-    
-    Session *sModel2 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:2] andSessionName:@"Session B" andSessionDesc:@"Test Session B." andLocation:@"8F Oxford" andDeptName:@"HR" andLecturer:@"Professor B" andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:12000.0] andStatus:@"Open" inContext:_managedObjectContext];
-    
-    
-    Session *sModel3 = [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:3] andSessionName:@"Session C" andSessionDesc:@"Test Session C." andLocation:@"9F Havard" andDeptName:@"34103001" andLecturer:@"Professor C"  andStartTime:[NSDate date] andEndTime:[NSDate dateWithTimeIntervalSinceNow:50000.0] andStatus:@"Open" inContext:_managedObjectContext];
-    
-    session = [[NSArray alloc]initWithObjects:sModel1,sModel2,sModel3, nil];
+    //session = [[NSArray alloc]initWithObjects:sModel1,sModel2,sModel3, nil];
     //session = [[NSArray alloc]initWithObjects:@"Session1", @"Session2", @"Session3", nil];
     
     // Uncomment the following line to preserve selection between presentations.
