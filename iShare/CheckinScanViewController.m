@@ -78,10 +78,19 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"请扫描正确的二维码" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
-        }
+        }        
+        
+        NSLog(@"%@", resultDic);
         
         //TODO: save the ticket info.
-        NSLog(@"%@", resultDic);
+        NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSString *errMsg = [DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
+        
+        if (errMsg != nil) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }     
         
         break;
     }
