@@ -25,6 +25,8 @@
 
 + (Session *) getSessionForID:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 
++ (NSArray *) getAllSessionsInContext:(NSManagedObjectContext *)context;
+
 + (NSMutableArray *) getAudienceBySessionId:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 
 + (Audience *) getAudienceByAudienceId:(NSNumber *)audienceID inContext:(NSManagedObjectContext *)context;
