@@ -52,6 +52,7 @@
         aModel.userID = userId;
         aModel.winIndicator = [NSNumber numberWithInt:0];
         aModel.session = sModel;
+        [self saveContext:context];
     }
     
     return aModel;
@@ -71,6 +72,62 @@
     }
 }
 
++ (bool) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
+  	Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+
+        NSString *temp= [JSONDic objectForKey: @"sessionid"];
+        if(temp== @""){
+              NSLog(@"sessionId  can't be empty");
+              return NO;
+        }
+    
+    Session *sModel = [self getSessionForID:temp inContext:context];
+    if (sModel == nil) {
+        NSString *sValue = [temp stringValue];
+        NSLog(@"Can't find data where SessionId= %@", sValue);
+	   return NO;
+    }else{
+        aModel.session= sModel;
+    }
+
+NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+[f setNumberStyle:NSNumberFormatterDecimalStyle];
+NSNumber *myNumber;
+temp= [JSONDic objectForKey: @"userid"];
+if(temp== @""){
+              //NSLog(@"userid can't be empty");
+              //return NO;
+         //without userId, this user is manual key in user.
+         aModel.lotteryIndicator = [NSNumber numberWithInt:0];
+}else{       
+       *myNumber = [f numberFromString:temp];      
+       aModel.userID = myNumber;
+       aModel.lotteryIndicator = [NSNumber numberWithInt:1];
+    }
+   aModel.checkinIndicator = @"Y";
+   aModel.attendTime = [NSDate date];
+   aModel.winIndicator = [NSNumber numberWithInt:0];
+
+temp= [JSONDic objectForKey: @"staffid"];
+if(temp== @""){
+              NSLog(@"staffid can't be empty");
+              return NO;
+}else{       
+       *myNumber = [f numberFromString:temp];       
+       aModel.staffID = myNumber;
+    }
+ 
+temp= [JSONDic objectForKey: @"staffname"];
+if(temp== @""){
+              NSLog(@"staffname can't be empty");
+              return NO;
+}else{             
+       aModel.staffName = temp;
+    }
+  [self saveContext:context];
+
+   return YES;
+}
 
 + (Session *) scannedInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime andStatus:(NSString *)status inContext:(NSManagedObjectContext *)context{
     
