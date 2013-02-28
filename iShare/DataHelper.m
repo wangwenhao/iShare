@@ -92,45 +92,46 @@
         aModel.session= sModel;
     }
 
-NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-[f setNumberStyle:NSNumberFormatterDecimalStyle];
-NSNumber *myNumber;
-temp= [JSONDic objectForKey: @"userid"];
-if(temp== @""){
-              //NSLog(@"userid can't be empty");
-              //return NO;
-         //without userId, this user is manual key in user.
-         aModel.lotteryIndicator = [NSNumber numberWithInt:0];
-}else{       
-       *myNumber = [f numberFromString:temp];      
-       aModel.userID = myNumber;
-       aModel.lotteryIndicator = [NSNumber numberWithInt:1];
-    }
-   aModel.checkinIndicator = @"Y";
-   aModel.attendTime = [NSDate date];
-   aModel.winIndicator = [NSNumber numberWithInt:0];
+	NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+	[f setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSNumber *myNumber;
+	temp= [JSONDic objectForKey: @"userid"];
+	if(temp== @""){
+              	//NSLog(@"userid can't be empty");
+              	//return NO;
+         	//without userId, this user is manual key in user.
+         	aModel.lotteryIndicator = [NSNumber numberWithInt:0];
+	}else{       
+       		*myNumber = [f numberFromString:temp];      
+       		aModel.userID = myNumber;
+       		aModel.lotteryIndicator = [NSNumber numberWithInt:1];
+    	}
+    	
+   	aModel.checkinIndicator = @"Y";
+   	aModel.attendTime = [NSDate date];
+   	aModel.winIndicator = [NSNumber numberWithInt:0];
 
-temp= [JSONDic objectForKey: @"staffid"];
-if(temp== @""){
+	temp= [JSONDic objectForKey: @"staffid"];
+	if(temp== @""){
               //NSLog(@"staffid can't be empty");
               //return NO;
               return @"staffid can't be empty";
-}else{       
-       *myNumber = [f numberFromString:temp];       
-       aModel.staffID = myNumber;
-    }
+	}else{       
+	       *myNumber = [f numberFromString:temp];       
+       		aModel.staffID = myNumber;
+    	}
  
-temp= [JSONDic objectForKey: @"staffname"];
-if(temp== @""){
+	temp= [JSONDic objectForKey: @"staffname"];
+	if(temp== @""){
               //NSLog(@"staffname can't be empty");
               //return NO;
               return @"staffname can't be empty";
-}else{             
-       aModel.staffName = temp;
-    }
-  [self saveContext:context];
+	}else{             
+       	      aModel.staffName = temp;
+    	}
+  	[self saveContext:context];
 
-   return nil;
+   	return nil;
 }
 
 + (Session *) scannedInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime andStatus:(NSString *)status inContext:(NSManagedObjectContext *)context{
@@ -220,9 +221,11 @@ if(temp== @""){
 + (NSArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context{
 	NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:SESSIONMODEL];
 	
-	NSString *sql = [NSString stringWithFormat:@"%@==%@", @"session.status", @"%@"];
-    	NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:status]];
-    	request.predicate = predicate;
+	if(status != nil){
+		NSString *sql = [NSString stringWithFormat:@"%@==%@", @"session.status", @"%@"];
+    		NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:status]];
+    		request.predicate = predicate;
+	}
     	
     	// Edit the sort key as appropriate.
     	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sessionID" ascending:YES];
