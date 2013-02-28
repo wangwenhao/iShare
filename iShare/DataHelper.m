@@ -222,9 +222,9 @@
 	NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:SESSIONMODEL];
 	
 	if(status != nil){
-		NSString *sql = [NSString stringWithFormat:@"%@==%@", @"session.status", @"%@"];
-    		NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:status]];
-    		request.predicate = predicate;
+	    NSString *sql = [NSString stringWithFormat:@"%@==%@", @"status", @"%@"];
+    	    NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:status]];
+    	    request.predicate = predicate;
 	}
     	
     	// Edit the sort key as appropriate.
