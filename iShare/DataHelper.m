@@ -76,15 +76,15 @@
   	Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
 
         NSString *temp= [JSONDic objectForKey: @"sessionid"];
-        if(temp== @""){
+        if([temp isEqualToString:@""]){
               //NSLog(@"sessionId  can't be empty");
               //return NO;
               return @"sessionId  can't be empty";
         }
     
-    Session *sModel = [self getSessionForID:temp inContext:context];
+    Session *sModel = [self getSessionForID:[NSNumber numberWithInteger:temp.integerValue] inContext:context];
     if (sModel == nil) {
-        NSString *sValue = [temp stringValue];
+        NSString *sValue = temp;
         //NSLog(@"Can't find data where SessionId= %@", sValue);
 	//return NO;
 	return [NSString stringWithFormat:@"Can't find data where SessionId= %@", sValue]; 
@@ -96,13 +96,13 @@
 	[f setNumberStyle:NSNumberFormatterDecimalStyle];
 	NSNumber *myNumber;
 	temp= [JSONDic objectForKey: @"userid"];
-	if(temp== @""){
+	if([temp isEqualToString:@""]){
               	//NSLog(@"userid can't be empty");
               	//return NO;
          	//without userId, this user is manual key in user.
          	aModel.lotteryIndicator = [NSNumber numberWithInt:0];
 	}else{       
-       		*myNumber = [f numberFromString:temp];      
+       		myNumber = [f numberFromString:temp];      
        		aModel.userID = myNumber;
        		aModel.lotteryIndicator = [NSNumber numberWithInt:1];
     	}
@@ -112,23 +112,23 @@
    	aModel.winIndicator = [NSNumber numberWithInt:0];
 
 	temp= [JSONDic objectForKey: @"staffid"];
-	if(temp== @""){
+	if([temp isEqualToString:@""]){
               //NSLog(@"staffid can't be empty");
               //return NO;
               return @"staffid can't be empty";
-	}else{       
-	       *myNumber = [f numberFromString:temp];       
-       		aModel.staffID = myNumber;
-    	}
+	}else{
+        myNumber = [f numberFromString:temp];
+        aModel.staffID = myNumber;
+    }
  
 	temp= [JSONDic objectForKey: @"staffname"];
-	if(temp== @""){
+	if([temp isEqualToString:@""]){
               //NSLog(@"staffname can't be empty");
               //return NO;
               return @"staffname can't be empty";
-	}else{             
-       	      aModel.staffName = temp;
-    	}
+	}else{
+        aModel.staffName = temp;
+    }
   	[self saveContext:context];
 
    	return nil;

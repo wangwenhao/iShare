@@ -9,6 +9,8 @@
 #import "CheckinScanViewController.h"
 #import "JSONKit.h"
 #import "Constants.h"
+#import "AppDelegate.h"
+#import "DataHelper.h"
 
 @interface CheckinScanViewController ()
 
