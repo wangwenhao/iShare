@@ -72,20 +72,22 @@
     }
 }
 
-+ (bool) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
++ (NSString *) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
   	Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
 
         NSString *temp= [JSONDic objectForKey: @"sessionid"];
         if(temp== @""){
-              NSLog(@"sessionId  can't be empty");
-              return NO;
+              //NSLog(@"sessionId  can't be empty");
+              //return NO;
+              return @"sessionId  can't be empty"；
         }
     
     Session *sModel = [self getSessionForID:temp inContext:context];
     if (sModel == nil) {
         NSString *sValue = [temp stringValue];
-        NSLog(@"Can't find data where SessionId= %@", sValue);
-	   return NO;
+        //NSLog(@"Can't find data where SessionId= %@", sValue);
+	//return NO;
+	return [NSString stringWithFormat:@"Can't find data where SessionId= %@", sValue]; 
     }else{
         aModel.session= sModel;
     }
@@ -110,8 +112,9 @@ if(temp== @""){
 
 temp= [JSONDic objectForKey: @"staffid"];
 if(temp== @""){
-              NSLog(@"staffid can't be empty");
-              return NO;
+              //NSLog(@"staffid can't be empty");
+              //return NO;
+              return @"staffid can't be empty";
 }else{       
        *myNumber = [f numberFromString:temp];       
        aModel.staffID = myNumber;
@@ -119,14 +122,15 @@ if(temp== @""){
  
 temp= [JSONDic objectForKey: @"staffname"];
 if(temp== @""){
-              NSLog(@"staffname can't be empty");
-              return NO;
+              //NSLog(@"staffname can't be empty");
+              //return NO;
+              return @"staffname can't be empty";
 }else{             
        aModel.staffName = temp;
     }
   [self saveContext:context];
 
-   return YES;
+   return nil;
 }
 
 + (Session *) scannedInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime andStatus:(NSString *)status inContext:(NSManagedObjectContext *)context{
