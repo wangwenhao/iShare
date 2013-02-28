@@ -8,6 +8,8 @@
 
 #import "SessionScanViewController.h"
 #import "JSONKit.h"
+#import "DataHelper.h"
+#import "AppDelegate.h"
 
 @interface SessionScanViewController ()
 
@@ -92,6 +94,14 @@
         }
         
         NSLog(@"%@", resultDic);
+        NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSString *errMsg = [DataHelper saveSessionWithDict:resultDic withContext:context];
+        if (errMsg != nil) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+        
         sessionPreViewController = [[SessionInfoPreviewViewController alloc]initWithSessionInfo:resultDic];
         [self presentViewController: sessionPreViewController animated: YES completion:^{}];
         break;

@@ -8,6 +8,7 @@
 
 #import "DataHelper.h"
 #import "Constants.h"
+#define Default_DATE_STRING_FORMAT @"yyyy/MM/dd HH:mm"
 
 @implementation DataHelper
 
@@ -185,6 +186,86 @@
     }
     
     return sModel;
+}
+
++ (NSString *) saveSessionWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
+    NSString *temp= [JSONDic objectForKey: @"sessionid"];
+    if([temp isEqualToString:@""]){
+        return @"sessionId can't be empty";
+    }
+    
+    Session *sModel = [self getSessionForID:[NSNumber numberWithInteger:temp.integerValue] inContext:context];
+    if (sModel != nil) {
+        return [NSString stringWithFormat:@"the session with SessionId=%@ already exists! You can checkin the audiences.", temp];
+    }else{
+        sModel.sessionID = [NSNumber numberWithInteger:temp.integerValue];
+    }
+
+    temp= [JSONDic objectForKey: @"sessionname"];
+    if([temp isEqualToString:@""]){
+        return @"sessionname can't be empty";
+    }
+    else{
+        sModel.sessionName = temp;
+    }
+
+    temp= [JSONDic objectForKey: @"sessiondesc"];
+    if([temp isEqualToString:@""]){
+        return @"sessiondesc can't be empty";
+    }
+    else{
+        sModel.sessionDesc = temp;
+    }
+    
+    temp= [JSONDic objectForKey: @"lecture"];
+    if([temp isEqualToString:@""]){
+        return @"lecture can't be empty";
+    }
+    else{
+        sModel.lecturer = temp;
+    }
+    
+    temp= [JSONDic objectForKey: @"location"];
+    if([temp isEqualToString:@""]){
+        return @"location can't be empty";
+    }
+    else{
+        sModel.location = temp;
+    }
+
+    temp= [JSONDic objectForKey: @"deptName"];
+    if([temp isEqualToString:@""]){
+        return @"location can't be empty";
+    }
+    else{
+        sModel.departmentName = temp;
+    }
+
+    sModel.scanedTime = [NSDate date];
+    sModel.status = @"Open";
+    
+	NSDateFormatter *f = [[NSDateFormatter alloc] init];
+	[f setDateFormat:Default_DATE_STRING_FORMAT];
+	NSDate *myDate;
+	temp= [JSONDic objectForKey: @"starttime"];
+	if([temp isEqualToString:@""]){
+        return @"starttime can't be empty";
+	}else{
+        myDate = [f dateFromString:temp];
+        sModel.startTime = myDate;
+    }
+    
+	temp= [JSONDic objectForKey: @"endtime"];
+	if([temp isEqualToString:@""]){
+        return @"endtime can't be empty";
+	}else{
+        myDate = [f dateFromString:temp];
+        sModel.startTime = myDate;
+    }
+    
+  	[self saveContext:context];
+    
+   	return nil;
 }
 
 + (Session *) getSessionForID:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context{

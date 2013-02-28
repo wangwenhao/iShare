@@ -23,6 +23,8 @@
 
 + (Session *) keyInSessionWithSessionId:(NSNumber *)sessionId andSessionName:(NSString *)sessionName andSessionDesc:(NSString *)sDesc andLocation:(NSString *)location andDeptName:(NSString *)deptName andLecturer:(NSString *)lecturer andStartTime:(NSDate *)startTime andEndTime:(NSDate *)endTime inContext:(NSManagedObjectContext *)context;
 
++ (NSString *) saveSessionWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context;
+
 + (Session *) getSessionForID:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context;
