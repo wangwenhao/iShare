@@ -79,7 +79,7 @@
         if(temp== @""){
               //NSLog(@"sessionId  can't be empty");
               //return NO;
-              return @"sessionId  can't be empty"；
+              return @"sessionId  can't be empty";
         }
     
     Session *sModel = [self getSessionForID:temp inContext:context];
