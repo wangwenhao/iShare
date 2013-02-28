@@ -217,6 +217,34 @@ if(temp== @""){
     return session;
 }
 
++ (NSArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context{
+	NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:SESSIONMODEL];
+	
+	NSString *sql = [NSString stringWithFormat:@"%@==%@", @"session.status", @"%@"];
+    	NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:status]];
+    	request.predicate = predicate;
+    	
+    	// Edit the sort key as appropriate.
+    	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sessionID" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    	[request setSortDescriptors:sortDescriptors];
+	
+ 	NSError *error = nil;
+	NSArray *results = [context executeFetchRequest:request error:&error];
+
+	if (error != nil) {
+   	    //Deal with failure
+   	    NSLog(@"Occur an error: %@, %@", error, error.userInfo);
+	    abort();
+	}
+	else {
+   	    //Deal with success
+	}
+	
+	return results;
+}
+
 + (NSMutableArray *) getAudienceBySessionId:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context{
     NSFetchRequest *query = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:AUDIENCEMODEL inManagedObjectContext:context];
