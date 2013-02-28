@@ -26,3 +26,6 @@
 #define kEnabledSound           @"enabled_sound"
 #define kEnabledVibrate         @"enabled_vibrate"
 #define kSliderAwardCount       @"slider_awardCount"
+
+//DateFormat
+#define kDateFormat             @"yyyy/MM/dd HH:mm"

@@ -15,6 +15,8 @@
 
 @implementation SessionScanViewController
 @synthesize reader;
+@synthesize scanView;
+@synthesize sessionPreViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,10 +46,19 @@
 
     reader = [[ZBarReaderView alloc]initWithImageScanner:scanner];
     
+    reader.frame = CGRectMake(0.0f, 0.0f, scanView.frame.size.width, scanView.frame.size.height);
     reader.readerDelegate = self;
     
-    [self.view addSubview:reader];
+    [scanView addSubview:reader];
     
+    [reader start];
+    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(scanStart:) name:@"SessionScanStart" object:nil];
+}
+
+-(void)scanStart:(id)sender
+{
     [reader start];
 }
 
@@ -80,9 +91,9 @@
             return;
         }
         
-        //TODO: save the session info.
         NSLog(@"%@", resultDic);
-        
+        sessionPreViewController = [[SessionInfoPreviewViewController alloc]initWithSessionInfo:resultDic];
+        [self presentViewController: sessionPreViewController animated: YES completion:^{}];
         break;
     }
 }
