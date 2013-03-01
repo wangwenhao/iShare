@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSString * sessionDesc;
 @property (nonatomic, retain) NSDate * startTime;
 @property (nonatomic, retain) NSString * status;
+@property (nonatomic) Boolean * uploadIndicator;
 @property (nonatomic, retain) NSSet *audiences;
 @end
 

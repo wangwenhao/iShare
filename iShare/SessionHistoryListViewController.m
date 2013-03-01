@@ -9,6 +9,7 @@
 #import "SessionHistoryListViewController.h"
 #import "AppDelegate.h"
 #import "DataHelper.h"
+#define CONFIRM_DELETION 3
 
 @interface SessionHistoryListViewController ()
 
@@ -82,28 +83,63 @@
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+        Session *sModel =(Session *)[session objectAtIndex:indexPath.row];
+        if(sModel.uploadIndicator){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程还未上传数据，如果删除，数据将无法恢复。您确认要删除？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"删除",nil];
+            alert.tag = CONFIRM_DELETION;
+            [alert show];
+
+        }
+        
+        NSError *err =[DataHelper deleteSessionWithSession:sModel withContext:_managedObjectContext];
+        if(err == nil){
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }else{
+            NSLog(@"Error occured:%@,%@",err, err.userInfo);
+            abort();
+        }
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
+-(void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (alert.tag) {
+        case CONFIRM_DELETION:
+            switch (buttonIndex) {
+                case 0://cancel
+                    
+                    break;
+                case 1://delete
+                    break;
+                default:
+                    NSLog(@"SessionHistoryListViewController.alertView: clickedButtonAtIndex. Unknown button.");
+                    break;
+            }
+            break;
+            
+        default:
+            NSLog(@"SessionHistoryListViewController.alertView: clickedButtonAtIndex. Unknown alert Type.");
+            break;
+    }
+}
+
 
 /*
 // Override to support rearranging the table view.

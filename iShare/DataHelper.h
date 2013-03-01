@@ -25,9 +25,13 @@
 
 + (NSString *) saveSessionWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context;
 
++ (NSError *) deleteSessionWithSessionId:(NSNumber *)sessionId withContext:(NSManagedObjectContext *) context;
+
++ (NSError *) deleteSessionWithSession:(Session *)session withContext:(NSManagedObjectContext *) context;
+
 + (Session *) getSessionForID:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context;
++ (NSMutableArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context;
 
 + (NSMutableArray *) getAudienceBySessionId:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 

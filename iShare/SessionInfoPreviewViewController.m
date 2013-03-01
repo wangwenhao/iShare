@@ -9,6 +9,8 @@
 #import "SessionInfoPreviewViewController.h"
 #import "Constants.h"
 #import "UILabel+VerticalAlign.h"
+#import "AppDelegate.h"
+#import "DataHelper.h"
 
 @interface SessionInfoPreviewViewController ()
 
@@ -73,6 +75,14 @@
 - (IBAction)saveCurrentSession:(id)sender {
     
     //TODO: save here
+    NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSString *errMsg = [DataHelper saveSessionWithDict:self.sessionDetails withContext:context];
+    if (errMsg != nil) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 

@@ -22,6 +22,7 @@
 @dynamic sessionDesc;
 @dynamic startTime;
 @dynamic status;
+@dynamic uploadIndicator;
 @dynamic audiences;
 
 @end

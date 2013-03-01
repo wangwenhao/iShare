@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSNumber * audienceID;
 @property (nonatomic, retain) NSString * checkinIndicator;
 @property (nonatomic, retain) NSNumber * lotteryIndicator;
-@property (nonatomic, retain) NSNumber * staffID;
+@property (nonatomic, retain) NSString * staffID;
 @property (nonatomic, retain) NSString * staffName;
 @property (nonatomic, retain) NSNumber * userID;
 @property (nonatomic, retain) NSNumber * winIndicator;

@@ -12,7 +12,7 @@
 
 @implementation DataHelper
 
-+ (Audience *) scannedInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSNumber *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
++ (Audience *) scannedInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
     Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
     
     Session *sModel = [self getSessionForID:sessionId inContext:context];
@@ -36,7 +36,7 @@
     return aModel;
 }
 
-+ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSNumber *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
++ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
     Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
     
     Session *sModel = [self getSessionForID:sessionId inContext:context];
@@ -78,17 +78,13 @@
 
         NSString *temp= [JSONDic objectForKey: @"sessionid"];
         if([temp isEqualToString:@""]){
-              //NSLog(@"sessionId  can't be empty");
-              //return NO;
-              return @"sessionId  can't be empty";
+            return @"sessionId  can't be empty";
         }
     
     Session *sModel = [self getSessionForID:[NSNumber numberWithInteger:temp.integerValue] inContext:context];
     if (sModel == nil) {
         NSString *sValue = temp;
-        //NSLog(@"Can't find data where SessionId= %@", sValue);
-	//return NO;
-	return [NSString stringWithFormat:@"Can't find data where SessionId= %@", sValue]; 
+        return [NSString stringWithFormat:@"Can't find data where SessionId= %@", sValue];
     }else{
         aModel.session= sModel;
     }
@@ -98,8 +94,6 @@
 	NSNumber *myNumber;
 	temp= [JSONDic objectForKey: @"userid"];
 	if([temp isEqualToString:@""]){
-              	//NSLog(@"userid can't be empty");
-              	//return NO;
          	//without userId, this user is manual key in user.
          	aModel.lotteryIndicator = [NSNumber numberWithInt:0];
 	}else{       
@@ -114,19 +108,15 @@
 
 	temp= [JSONDic objectForKey: @"staffid"];
 	if([temp isEqualToString:@""]){
-              //NSLog(@"staffid can't be empty");
-              //return NO;
-              return @"staffid can't be empty";
+        return @"staffid can't be empty";
 	}else{
-        myNumber = [f numberFromString:temp];
-        aModel.staffID = myNumber;
+        //myNumber = [f numberFromString:temp];
+        aModel.staffID = temp;
     }
  
 	temp= [JSONDic objectForKey: @"staffname"];
 	if([temp isEqualToString:@""]){
-              //NSLog(@"staffname can't be empty");
-              //return NO;
-              return @"staffname can't be empty";
+        return @"staffname can't be empty";
 	}else{
         aModel.staffName = temp;
     }
@@ -155,6 +145,7 @@
         sModel.startTime = startTime;
         sModel.endTime = endTime;
         sModel.status = status;
+        sModel.uploadIndicator = NO;
         
         [self saveContext:context];
     }
@@ -182,6 +173,7 @@
         sModel.startTime = startTime;
         sModel.endTime = endTime;
         sModel.status = @"Open";
+        sModel.uploadIndicator = NO;
         [self saveContext:context];
     }
     
@@ -243,6 +235,7 @@
 
     sModel.scanedTime = [NSDate date];
     sModel.status = @"Open";
+    sModel.uploadIndicator = NO;
     
 	NSDateFormatter *f = [[NSDateFormatter alloc] init];
 	[f setDateFormat:Default_DATE_STRING_FORMAT];
@@ -267,6 +260,25 @@
     
    	return nil;
 }
+
++ (NSError *) deleteSessionWithSessionId:(NSNumber *)sessionId withContext:(NSManagedObjectContext *) context{
+    Session *sModel = [self getSessionForID:sessionId inContext:context];
+    
+    [context deleteObject:sModel];
+    
+    NSError *err= nil;
+    [context save:&err];
+    return err;
+}
+
++ (NSError *) deleteSessionWithSession:(Session *)session withContext:(NSManagedObjectContext *) context{
+    [context deleteObject:session];
+    
+    NSError *err= nil;
+    [context save:&err];
+    return err;
+}
+
 
 + (Session *) getSessionForID:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context{
     NSFetchRequest *query = [[NSFetchRequest alloc] init];
@@ -299,7 +311,7 @@
     return session;
 }
 
-+ (NSArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context{
++ (NSMutableArray *) getAllSessionsWithStatus:(NSString *)status InContext:(NSManagedObjectContext *)context{
 	NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:SESSIONMODEL];
 	
 	if(status != nil){
@@ -324,9 +336,8 @@
 	}
 	else {
    	    //Deal with success
+        return [results mutableCopy];
 	}
-	
-	return results;
 }
 
 + (NSMutableArray *) getAudienceBySessionId:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context{

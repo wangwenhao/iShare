@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Audience" syncable="YES">
         <attribute name="attendTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="audienceID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="checkinIndicator" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lotteryIndicator" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="staffID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="staffID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="staffName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="winIndicator" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -22,10 +22,11 @@
         <attribute name="sessionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="audiences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Audience" inverseName="session" inverseEntity="Audience" syncable="YES"/>
+        <attribute name="uploadIndicator" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="audiences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Audience" inverseName="session" inverseEntity="Audience" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Audience" positionX="-621" positionY="-243" width="128" height="178"/>
-        <element name="Session" positionX="-938" positionY="-280" width="128" height="208"/>
+        <element name="Audience" positionX="-621" positionY="-243" width="128" height="180"/>
+        <element name="Session" positionX="-938" positionY="-280" width="128" height="225"/>
     </elements>
 </model>
