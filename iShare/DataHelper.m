@@ -181,7 +181,7 @@
 }
 
 + (NSString *) saveSessionWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
-    NSString *temp= [JSONDic objectForKey: @"sessionid"];
+    NSString *temp= [[JSONDic objectForKey: @"sessionid"] stringValue];
     if([temp isEqualToString:@""]){
         return @"sessionId can't be empty";
     }
@@ -190,6 +190,7 @@
     if (sModel != nil) {
         return [NSString stringWithFormat:@"the session with SessionId=%@ already exists! You can checkin the audiences.", temp];
     }else{
+        sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = [NSNumber numberWithInteger:temp.integerValue];
     }
 

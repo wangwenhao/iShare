@@ -49,6 +49,7 @@
     reader = [[ZBarReaderView alloc]initWithImageScanner:scanner];
     
     reader.frame = CGRectMake(0.0f, 0.0f, scanView.frame.size.width, scanView.frame.size.height);
+    reader.torchMode = NO;
     reader.readerDelegate = self;
     
     [scanView addSubview:reader];
