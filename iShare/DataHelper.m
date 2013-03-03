@@ -76,7 +76,7 @@
 + (NSString *) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
   	Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
 
-        NSString *temp= [JSONDic objectForKey: @"sessionid"];
+        NSString *temp= [[JSONDic objectForKey: @"sessionid"] stringValue];
         if([temp isEqualToString:@""]){
             return @"sessionId  can't be empty";
         }
@@ -92,7 +92,7 @@
 	NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
 	[f setNumberStyle:NSNumberFormatterDecimalStyle];
 	NSNumber *myNumber;
-	temp= [JSONDic objectForKey: @"userid"];
+	temp= [[JSONDic objectForKey: @"userid"] stringValue];
 	if([temp isEqualToString:@""]){
          	//without userId, this user is manual key in user.
          	aModel.lotteryIndicator = [NSNumber numberWithInt:0];

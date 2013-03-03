@@ -10,6 +10,7 @@
 #import "JSONKit.h"
 #import "DataHelper.h"
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface SessionScanViewController ()
 
@@ -95,6 +96,9 @@
         }
         
         NSLog(@"%@", resultDic);
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[resultDic objectForKey:@"sessionid"] forKey:kCurrentSession];
                 
         sessionPreViewController = [[SessionInfoPreviewViewController alloc]initWithSessionInfo:resultDic];
         [self presentViewController: sessionPreViewController animated: YES completion:^{}];

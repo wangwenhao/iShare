@@ -26,6 +26,12 @@
 #define kEnabledSound           @"enabled_sound"
 #define kEnabledVibrate         @"enabled_vibrate"
 #define kSliderAwardCount       @"slider_awardCount"
+#define kCurrentSession         @"session_current"
 
 //DateFormat
 #define kDateFormat             @"yyyy/MM/dd HH:mm"
+
+//AlertView Tags
+#define kNoSessionSeleted       9999
+#define kAddAudienceError       9998
+#define kSessionMismatch        9997

@@ -18,6 +18,8 @@
 
 @implementation CheckinScanViewController
 @synthesize reader;
+@synthesize scanView;
+@synthesize keyinStaffIDViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +40,7 @@
 {
     [super viewDidLoad];
     self.title = @"扫描";
+    
     // Do any additional setup after loading the view from its nib.
     ZBarImageScanner *scanner = [[ZBarImageScanner alloc]init];
     [scanner setSymbology: ZBAR_I25
@@ -45,12 +48,21 @@
                        to: 0];
     
     reader = [[ZBarReaderView alloc]initWithImageScanner:scanner];
-    
+    reader.frame = CGRectMake(0.0f, 0.0f, scanView.frame.size.width, scanView.frame.size.height);
+    reader.torchMode = NO;
     reader.readerDelegate = self;
     
-    [self.view addSubview:reader];
+    [scanView addSubview:reader];
     
     [reader start];
+    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(scanStart:) name:@"CheckinScanStart" object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 -(void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
@@ -78,11 +90,20 @@
         
         if (![self isValidTicketJson:resultDic]) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"请扫描正确的二维码" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            alert.tag = kAddAudienceError;
             [alert show];
             return;
         }        
         
         NSLog(@"%@", resultDic);
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([[defaults objectForKey:kCurrentSession] integerValue] != [[resultDic objectForKey:@"sessionid"] integerValue]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"课程与当前课程不符，你走错教室了吗？" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alert.tag = kSessionMismatch;
+            [alert show];
+            return;
+        }
         
         //TODO: save the ticket info.
         NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
@@ -92,10 +113,24 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
-        }     
+        }
+        
+        [reader start];
         
         break;
     }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == kSessionMismatch) {
+        [reader start];
+    }
+}
+
+- (IBAction)KeyinStaffIDTapped:(id)sender {
+    keyinStaffIDViewController = [[KeyinStaffIDViewController alloc]initWithNibName:@"KeyinStaffIDView" bundle:nil];
+    [self presentViewController:keyinStaffIDViewController animated:YES completion:^{}];
 }
 
 -(BOOL)isValidTicketJson:(NSDictionary *)JSONDic
@@ -108,6 +143,11 @@
     if (![key containsObject:@"staffname"]) return NO;
     
     return YES;
+}
+
+-(void)scanStart:(id)sender
+{
+    [reader start];
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "Constants.h"
 
 @interface MainViewController ()
 
@@ -41,6 +42,14 @@
 }
 
 - (IBAction)checkinScanButtonTapped:(id)sender {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:kCurrentSession] == nil) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"还没选择当前课程，请扫描先" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.tag = kNoSessionSeleted;
+        [alert show];
+        return;
+    }
     checkinScanViewController = [[CheckinScanViewController alloc]initWithNibName:@"CheckinScanView" bundle:nil];
     [self.navigationController pushViewController:checkinScanViewController animated:YES];
 }

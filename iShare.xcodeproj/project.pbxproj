@@ -37,6 +37,10 @@
 		B5895A2A16D65BE90073FAE6 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5895A2816D65BE90073FAE6 /* SettingViewController.m */; };
 		B5895A2B16D65BE90073FAE6 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5895A2916D65BE90073FAE6 /* SettingView.xib */; };
 		B5B7E4F116DE32FF00DBB201 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B7E4F016DE32FE00DBB201 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B5CA093316E379A600CDD0E1 /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CA093216E379A600CDD0E1 /* AppIcon.png */; };
+		B5CA093516E379B000CDD0E1 /* AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CA093416E379B000CDD0E1 /* AppIcon@2x.png */; };
+		B5CA093916E38D8A00CDD0E1 /* KeyinStaffIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */; };
+		B5CA093A16E38D8A00CDD0E1 /* KeyinStaffIDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */; };
 		B5D9666416DB9BD2009F1204 /* CheckinScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */; };
 		B5D9666516DB9BD2009F1204 /* CheckinScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */; };
 		B5D9666916DBA78B009F1204 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D9666816DBA78B009F1204 /* AudioToolbox.framework */; };
@@ -115,6 +119,11 @@
 		B5895A2916D65BE90073FAE6 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 		B5B7E4EF16DE32FE00DBB201 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		B5B7E4F016DE32FE00DBB201 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		B5CA093216E379A600CDD0E1 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIcon.png; path = ../AppIcon.png; sourceTree = "<group>"; };
+		B5CA093416E379B000CDD0E1 /* AppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon@2x.png"; path = "../AppIcon@2x.png"; sourceTree = "<group>"; };
+		B5CA093616E38D8900CDD0E1 /* KeyinStaffIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyinStaffIDViewController.h; sourceTree = "<group>"; };
+		B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyinStaffIDViewController.m; sourceTree = "<group>"; };
+		B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyinStaffIDView.xib; sourceTree = "<group>"; };
 		B5D9666116DB9BD2009F1204 /* CheckinScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinScanViewController.h; sourceTree = "<group>"; };
 		B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinScanViewController.m; sourceTree = "<group>"; };
 		B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckinScanView.xib; sourceTree = "<group>"; };
@@ -237,6 +246,9 @@
 				B573B29416DF880A00E69CBF /* SessionInfoPreviewViewController.h */,
 				B573B29516DF880A00E69CBF /* SessionInfoPreviewViewController.m */,
 				B573B29616DF880B00E69CBF /* SessionInfoPreviewView.xib */,
+				B5CA093616E38D8900CDD0E1 /* KeyinStaffIDViewController.h */,
+				B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */,
+				B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */,
 				B573B29916DF8C6800E69CBF /* UILabel+VerticalAlign.h */,
 				B573B29A16DF8C6800E69CBF /* UILabel+VerticalAlign.m */,
 			);
@@ -246,6 +258,8 @@
 		B55F8D5F16D3ADB200870665 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5CA093216E379A600CDD0E1 /* AppIcon.png */,
+				B5CA093416E379B000CDD0E1 /* AppIcon@2x.png */,
 				B53970C516DCE6F200CE490C /* Settings.bundle */,
 				B55F8D6016D3ADB200870665 /* iShare-Info.plist */,
 				B55F8D6116D3ADB200870665 /* InfoPlist.strings */,
@@ -398,6 +412,9 @@
 				B5D9666B16DBAA38009F1204 /* da.wav in Resources */,
 				B53970C616DCE6F200CE490C /* Settings.bundle in Resources */,
 				B573B29816DF880B00E69CBF /* SessionInfoPreviewView.xib in Resources */,
+				B5CA093316E379A600CDD0E1 /* AppIcon.png in Resources */,
+				B5CA093516E379B000CDD0E1 /* AppIcon@2x.png in Resources */,
+				B5CA093A16E38D8A00CDD0E1 /* KeyinStaffIDView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +439,7 @@
 				B5B7E4F116DE32FF00DBB201 /* JSONKit.m in Sources */,
 				B573B29716DF880B00E69CBF /* SessionInfoPreviewViewController.m in Sources */,
 				B573B29B16DF8C6900E69CBF /* UILabel+VerticalAlign.m in Sources */,
+				B5CA093916E38D8A00CDD0E1 /* KeyinStaffIDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
