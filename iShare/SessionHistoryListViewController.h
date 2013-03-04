@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SessionDetailsViewController.h"
 
 @interface SessionHistoryListViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray *session;
+@property (strong, nonatomic) SessionDetailsViewController *detailsViewController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

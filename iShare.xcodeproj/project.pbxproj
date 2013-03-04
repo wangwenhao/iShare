@@ -41,6 +41,8 @@
 		B5CA093516E379B000CDD0E1 /* AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CA093416E379B000CDD0E1 /* AppIcon@2x.png */; };
 		B5CA093916E38D8A00CDD0E1 /* KeyinStaffIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */; };
 		B5CA093A16E38D8A00CDD0E1 /* KeyinStaffIDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */; };
+		B5CA09AB16E4D09500CDD0E1 /* SessionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CA09A916E4D09300CDD0E1 /* SessionDetailsViewController.m */; };
+		B5CA09AC16E4D09500CDD0E1 /* SessionDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */; };
 		B5D9666416DB9BD2009F1204 /* CheckinScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */; };
 		B5D9666516DB9BD2009F1204 /* CheckinScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */; };
 		B5D9666916DBA78B009F1204 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D9666816DBA78B009F1204 /* AudioToolbox.framework */; };
@@ -124,6 +126,9 @@
 		B5CA093616E38D8900CDD0E1 /* KeyinStaffIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyinStaffIDViewController.h; sourceTree = "<group>"; };
 		B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyinStaffIDViewController.m; sourceTree = "<group>"; };
 		B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyinStaffIDView.xib; sourceTree = "<group>"; };
+		B5CA09A816E4D09300CDD0E1 /* SessionDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDetailsViewController.h; sourceTree = "<group>"; };
+		B5CA09A916E4D09300CDD0E1 /* SessionDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDetailsViewController.m; sourceTree = "<group>"; };
+		B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDetailsView.xib; sourceTree = "<group>"; };
 		B5D9666116DB9BD2009F1204 /* CheckinScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinScanViewController.h; sourceTree = "<group>"; };
 		B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinScanViewController.m; sourceTree = "<group>"; };
 		B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckinScanView.xib; sourceTree = "<group>"; };
@@ -234,6 +239,9 @@
 				B5895A2216D64D450073FAE6 /* SessionHistoryListViewController.h */,
 				B5895A2316D64D450073FAE6 /* SessionHistoryListViewController.m */,
 				B5895A2416D64D450073FAE6 /* SessionHistoryListView.xib */,
+				B5CA09A816E4D09300CDD0E1 /* SessionDetailsViewController.h */,
+				B5CA09A916E4D09300CDD0E1 /* SessionDetailsViewController.m */,
+				B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */,
 				B5895A2716D65BE90073FAE6 /* SettingViewController.h */,
 				B5895A2816D65BE90073FAE6 /* SettingViewController.m */,
 				B5895A2916D65BE90073FAE6 /* SettingView.xib */,
@@ -415,6 +423,7 @@
 				B5CA093316E379A600CDD0E1 /* AppIcon.png in Resources */,
 				B5CA093516E379B000CDD0E1 /* AppIcon@2x.png in Resources */,
 				B5CA093A16E38D8A00CDD0E1 /* KeyinStaffIDView.xib in Resources */,
+				B5CA09AC16E4D09500CDD0E1 /* SessionDetailsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +449,7 @@
 				B573B29716DF880B00E69CBF /* SessionInfoPreviewViewController.m in Sources */,
 				B573B29B16DF8C6900E69CBF /* UILabel+VerticalAlign.m in Sources */,
 				B5CA093916E38D8A00CDD0E1 /* KeyinStaffIDViewController.m in Sources */,
+				B5CA09AB16E4D09500CDD0E1 /* SessionDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

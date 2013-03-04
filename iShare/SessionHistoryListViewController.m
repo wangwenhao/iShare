@@ -19,6 +19,7 @@
 
 @synthesize session;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize detailsViewController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -79,6 +80,7 @@
     
     // Configure the cell...
     cell.textLabel.text = [(Session *)[session objectAtIndex:indexPath.row] sessionName];
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     return cell;
 }
@@ -168,6 +170,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+
+    NSNumber *sessionId = [(Session *)[session objectAtIndex:indexPath.row] sessionID];
+    detailsViewController = [[SessionDetailsViewController alloc]initWithSessionId:sessionId];
+    
+    [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
 @end
