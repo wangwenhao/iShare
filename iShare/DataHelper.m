@@ -12,13 +12,23 @@
 @implementation DataHelper
 
 + (Audience *) scannedInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
-    Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    
+    
+    Audience *aModel = [self getAudienceBySessionId:sessionId andStaffId:staffId inContext:context];
+    if(aModel == nil){
+        aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该员工已签到。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+    }
+    
     
     Session *sModel = [self getSessionForID:sessionId inContext:context];
     if (sModel == nil) {
-        NSString *sValue = [sessionId stringValue];
-        NSLog(@"Can't find data where SessionId= %@", sValue);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"未找到该课程。请先扫描课程。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
     } else {
         aModel.checkinIndicator = @"Y";
         aModel.attendTime = [NSDate date];
@@ -36,13 +46,22 @@
 }
 
 + (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context{
-    Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    Audience *aModel = [self getAudienceBySessionId:sessionId andStaffId:staffId inContext:context];
+    if(aModel == nil){
+        aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该员工已签到。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+    }
+
     
     Session *sModel = [self getSessionForID:sessionId inContext:context];
     if (sModel == nil) {
-        NSString *sValue = [sessionId stringValue];
-        NSLog(@"Can't find data where SessionId= %@", sValue);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"未找到该课程。请先扫描课程。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+
     } else {
         aModel.checkinIndicator = @"Y";
         aModel.attendTime = [NSDate date];
@@ -59,6 +78,27 @@
     
 }
 
++ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId inContext:(NSManagedObjectContext *)context{
+    
+    Audience *aModel = [self getAudienceBySessionId:sessionId andStaffId:staffId inContext:context];
+    if(aModel == nil){
+        aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该员工已签到。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+    }
+    
+    Session *sModel = [self getSessionForID:sessionId inContext:context];
+    if (sModel == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"未找到该课程。请先扫描课程。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+    } else {
+        return [self keyInAudienceWithSessionId:sessionId andStaffId:staffId andStaffName:nil andUserId:nil inContext:context];
+    }
+}
+
 + (bool) updateAudienceWithAudienceId:(NSNumber *)aId andWinLottery:(NSNumber *)winStatus inContext:(NSManagedObjectContext *)context{
     Audience *aModel = [self getAudienceByAudienceId:aId inContext:context];
     
@@ -73,14 +113,32 @@
 }
 
 + (NSString *) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
-  	Audience *aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
-
-        NSString *temp= [[JSONDic objectForKey: @"sessionid"] stringValue];
-        if([temp isEqualToString:@""]){
-            return @"sessionId  can't be empty";
-        }
+    NSString *sessionId= [[JSONDic objectForKey: @"sessionid"] stringValue];
+    if([sessionId isEqualToString:@""]){
+        return @"sessionId can't be empty";
+    }
+    NSNumber *sId = [NSNumber numberWithInteger:sessionId.integerValue];
     
-    Session *sModel = [self getSessionForID:[NSNumber numberWithInteger:temp.integerValue] inContext:context];
+    NSString *temp= [JSONDic objectForKey: @"staffid"];
+    NSString *staffId=nil;
+	if([temp isEqualToString:@""]){
+        return @"staffid can't be empty";
+    }else{
+        staffId=[NSString stringWithString:temp];
+    }
+    
+  	Audience *aModel = [self getAudienceBySessionId:sId andStaffId:staffId inContext:context];
+    
+    
+    if(aModel == nil){
+        aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    }
+    else{
+        return @"该员工已签到！";
+    }
+
+            
+    Session *sModel = [self getSessionForID:sId inContext:context];
     if (sModel == nil) {
         NSString *sValue = temp;
         return [NSString stringWithFormat:@"Can't find data where SessionId= %@", sValue];
@@ -105,13 +163,13 @@
    	aModel.attendTime = [NSDate date];
    	aModel.winIndicator = [NSNumber numberWithInt:0];
 
-	temp= [JSONDic objectForKey: @"staffid"];
-	if([temp isEqualToString:@""]){
-        return @"staffid can't be empty";
-	}else{
+//	temp= [JSONDic objectForKey: @"staffid"];
+//	if([temp isEqualToString:@""]){
+//        return @"staffid can't be empty";
+//	}else{
         //myNumber = [f numberFromString:temp];
-        aModel.staffID = temp;
-    }
+        aModel.staffID = staffId;
+//    }
  
 	temp= [JSONDic objectForKey: @"staffname"];
 	if([temp isEqualToString:@""]){
@@ -129,9 +187,12 @@
     Session *sModel = [self getSessionForID:sessionId inContext:context];
     
     if (sModel != nil) {
-        NSString *sValue = [sessionId stringValue];
-        NSLog(@"already exist the session with SessionId= %@, just return the session from context.", sValue);
-	    //abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程已扫描。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+//        NSString *sValue = [sessionId stringValue];
+//        NSLog(@"already exist the session with SessionId= %@, just return the session from context.", sValue);
+//	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = sessionId;
@@ -157,8 +218,11 @@
     Session *sModel = [self getSessionForID:sessionId inContext:context];
     
     if (sModel != nil) {
-        NSString *sValue = [sessionId stringValue];
-        NSLog(@"already exist the session with SessionId= %@,just return the session from context.", sValue);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程已扫描。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return nil;
+//        NSString *sValue = [sessionId stringValue];
+//        NSLog(@"already exist the session with SessionId= %@,just return the session from context.", sValue);
 	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
@@ -187,7 +251,7 @@
     
     Session *sModel = [self getSessionForID:[NSNumber numberWithInteger:temp.integerValue] inContext:context];
     if (sModel != nil) {
-        return [NSString stringWithFormat:@"the session with SessionId=%@ already exists! You can checkin the audiences.", temp];
+        return @"该课程已扫描。";
     }else{
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = [NSNumber numberWithInteger:temp.integerValue];
@@ -403,6 +467,28 @@
     
     //[query release];//todo: need check release
     return aModel;
+}
+
++ (Audience *) getAudienceBySessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffID inContext:(NSManagedObjectContext *)context{
+    NSFetchRequest *query = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:AUDIENCEMODEL inManagedObjectContext:context];
+    query.entity = entity;
+    NSString *sql = [NSString stringWithFormat:@"%@==%@ and %@==%@", @"session.sessionID", @"%@",StaffID,@"%@"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObjects:sessionId,staffID,nil]];
+    query.predicate = predicate;
+        
+    Audience *aModel = nil;
+    NSError *error = nil;
+    NSArray *result = [context executeFetchRequest:query error:&error];
+    if (result == nil) {
+        return nil;
+    } else if ([result count] > 0) {
+        aModel = [result objectAtIndex:0];
+    }
+    
+    //[query release];//todo: need check release
+    return aModel;
+
 }
 
 +(void) saveContext:(NSManagedObjectContext *)context{

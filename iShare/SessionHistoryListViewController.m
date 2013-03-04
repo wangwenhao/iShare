@@ -9,7 +9,7 @@
 #import "SessionHistoryListViewController.h"
 #import "AppDelegate.h"
 #import "DataHelper.h"
-#define CONFIRM_DELETION 3
+#define CONFIRM_DELETION 33
 
 @interface SessionHistoryListViewController ()
 
@@ -40,6 +40,7 @@
         _managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
         NSLog(@"After managedObjectContext: %@",  _managedObjectContext);
     }
+    
     
     session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
     

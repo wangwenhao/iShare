@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SessionDetailsViewController.h"
 
-@interface SessionHistoryListViewController : UITableViewController
+@interface SessionHistoryListViewController : UITableViewController<UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSArray *session;
 @property (strong, nonatomic) SessionDetailsViewController *detailsViewController;

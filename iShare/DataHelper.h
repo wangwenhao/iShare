@@ -11,9 +11,11 @@
 
 @interface DataHelper:NSObject
 
-+ (Audience *) scannedInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSNumber *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context;
++ (Audience *) scannedInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context;
 
-+ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSNumber *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context;
++ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId andStaffName:(NSString *)staffName andUserId:(NSNumber *)userId inContext:(NSManagedObjectContext *)context;
+
++ (Audience *) keyInAudienceWithSessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffId inContext:(NSManagedObjectContext *)context;
 
 + (bool) updateAudienceWithAudienceId:(NSNumber *)aId andWinLottery:(NSNumber *)winStatus inContext:(NSManagedObjectContext *)context;
 
@@ -36,6 +38,8 @@
 + (NSMutableArray *) getAudienceBySessionId:(NSNumber *)sessionId inContext:(NSManagedObjectContext *)context;
 
 + (Audience *) getAudienceByAudienceId:(NSNumber *)audienceID inContext:(NSManagedObjectContext *)context;
+
++ (Audience *) getAudienceBySessionId:(NSNumber *)sessionId andStaffId:(NSString *)staffID inContext:(NSManagedObjectContext *)context;
 
 +(void) saveContext:(NSManagedObjectContext *)context;
 @end
