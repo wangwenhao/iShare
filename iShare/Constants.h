@@ -29,9 +29,19 @@
 #define kCurrentSession         @"session_current"
 
 //DateFormat
-#define kDateFormat             @"yyyy/MM/dd HH:mm"
+#define kDateFormat             @"yyyy-MM-dd HH:mm:ss"
 
 //AlertView Tags
 #define kNoSessionSeleted       9999
 #define kAddAudienceError       9998
 #define kSessionMismatch        9997
+
+//Session Json Items
+#define kSessionID              @"sessionId"
+#define kSessionName            @"sessionName"
+#define kSessionStartTime       @"startTime"
+#define kSessionEndTime         @"endTime"
+#define kSessionLecturer        @"lecturer"
+#define kSessionDepartment      @"deptName"
+#define kSessionLocation        @"location"
+#define kSessionDesc            @"desc"

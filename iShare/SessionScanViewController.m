@@ -84,7 +84,8 @@
         [reader stop];
         
         //TODO: Hardcode for testing
-        NSString *jsonString = @"{\"sessionid\":1,\"sessionname\":\"session 1\",\"sessiondesc\":\"this session is for testing\",\"starttime\":\"2013/12/25 13:00\",\"endtime\":\"2013/12/25 15:00\", \"lecture\":\"peter\",\"location\":\"7F Cambridge\",\"deptName\":\"34103001\"}";
+//        NSString *jsonString = @"{\"sessionid\":1,\"sessionname\":\"session 1\",\"sessiondesc\":\"this session is for testing\",\"starttime\":\"2013/12/25 13:00\",\"endtime\":\"2013/12/25 15:00\", \"lecture\":\"peter\",\"location\":\"7F Cambridge\",\"deptName\":\"34103001\"}";
+        NSString *jsonString = symbol.data;
         
         NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *resultDic = [jsonData objectFromJSONData];
@@ -96,9 +97,6 @@
         }
         
         NSLog(@"%@", resultDic);
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:[resultDic objectForKey:@"sessionid"] forKey:kCurrentSession];
                 
         sessionPreViewController = [[SessionInfoPreviewViewController alloc]initWithSessionInfo:resultDic];
         [self presentViewController: sessionPreViewController animated: YES completion:^{}];
@@ -110,14 +108,14 @@
 {
     NSArray *key = [JSONDic allKeys];
     if ([key count] != 8) return NO;
-    if (![key containsObject:@"sessionid"]) return NO;
-    if (![key containsObject:@"sessionname"]) return NO;
-    if (![key containsObject:@"sessiondesc"]) return NO;
-    if (![key containsObject:@"starttime"]) return NO;
-    if (![key containsObject:@"endtime"]) return NO;
-    if (![key containsObject:@"lecture"]) return NO;
-    if (![key containsObject:@"location"]) return NO;
-    if (![key containsObject:@"deptName"]) return NO;
+    if (![key containsObject:kSessionID]) return NO;
+    if (![key containsObject:kSessionName]) return NO;
+    if (![key containsObject:kSessionDesc]) return NO;
+    if (![key containsObject:kSessionStartTime]) return NO;
+    if (![key containsObject:kSessionEndTime]) return NO;
+    if (![key containsObject:kSessionLecturer]) return NO;
+    if (![key containsObject:kSessionLocation]) return NO;
+    if (![key containsObject:kSessionDepartment]) return NO;
 
     return YES;
 }

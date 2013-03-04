@@ -83,7 +83,7 @@
         [reader stop];
         
         //TODO: Hardcode for testing
-        NSString *jsonString = @"{\"sessionid\":1,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
+        NSString *jsonString = @"{\"sessionid\":2,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
         
         NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *resultDic = [jsonData objectFromJSONData];

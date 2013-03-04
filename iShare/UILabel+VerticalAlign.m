@@ -12,6 +12,10 @@
 
 - (void)alignTop {
     
+    if ([self.text isEqualToString:@""]) {
+        return;
+    }
+    
     CGSize fontSize = [self.text sizeWithFont:self.font];
     double finalHeight = self.frame.size.height;
     double finalWidth = self.frame.size.width;    //expected width of label

@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "Constants.h"
+#import "DataHelper.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 
@@ -19,6 +21,7 @@
 @synthesize sessionScanViewController;
 @synthesize settingViewController;
 @synthesize checkinScanViewController;
+@synthesize currentSessionLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +36,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    if ([defaults objectForKey:kCurrentSession] != nil) {
+        NSNumber *sessionId = [NSNumber numberWithInteger:[[defaults objectForKey:kCurrentSession] integerValue]];
+        self.currentSessionLabel.text = [[DataHelper getSessionForID:sessionId inContext:context] sessionName];
+    }
 }
 
 - (void)didReceiveMemoryWarning

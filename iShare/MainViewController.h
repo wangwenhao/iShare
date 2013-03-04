@@ -24,4 +24,5 @@
 - (IBAction)sessionScanButtonTapped:(id)sender;
 - (IBAction)sessionHistoryListButtonTapped:(id)sender;
 - (IBAction)settingButtonTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *currentSessionLabel;
 @end

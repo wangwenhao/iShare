@@ -8,7 +8,6 @@
 
 #import "DataHelper.h"
 #import "Constants.h"
-#define Default_DATE_STRING_FORMAT @"yyyy/MM/dd HH:mm"
 
 @implementation DataHelper
 
@@ -181,7 +180,7 @@
 }
 
 + (NSString *) saveSessionWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
-    NSString *temp= [[JSONDic objectForKey: @"sessionid"] stringValue];
+    NSString *temp= [JSONDic objectForKey:kSessionID];
     if([temp isEqualToString:@""]){
         return @"sessionId can't be empty";
     }
@@ -194,7 +193,7 @@
         sModel.sessionID = [NSNumber numberWithInteger:temp.integerValue];
     }
 
-    temp= [JSONDic objectForKey: @"sessionname"];
+    temp= [JSONDic objectForKey:kSessionName];
     if([temp isEqualToString:@""]){
         return @"sessionname can't be empty";
     }
@@ -202,56 +201,59 @@
         sModel.sessionName = temp;
     }
 
-    temp= [JSONDic objectForKey: @"sessiondesc"];
-    if([temp isEqualToString:@""]){
-        return @"sessiondesc can't be empty";
-    }
-    else{
-        sModel.sessionDesc = temp;
-    }
+    //Hi, Tiger, do we need such checks???
+//    temp= [JSONDic objectForKey:kSessionDesc];
+//    if([temp isEqualToString:@""]){
+//        return @"sessiondesc can't be empty";
+//    }
+//    else{
+        sModel.sessionDesc = [JSONDic objectForKey:kSessionDesc];
+//    }
     
-    temp= [JSONDic objectForKey: @"lecture"];
-    if([temp isEqualToString:@""]){
-        return @"lecture can't be empty";
-    }
-    else{
-        sModel.lecturer = temp;
-    }
+//    temp= [JSONDic objectForKey:kSessionLecturer];
+//    if([temp isEqualToString:@""]){
+//        return @"lecture can't be empty";
+//    }
+//    else{
+        sModel.lecturer = [JSONDic objectForKey:kSessionLecturer];
+//    }
     
-    temp= [JSONDic objectForKey: @"location"];
-    if([temp isEqualToString:@""]){
-        return @"location can't be empty";
-    }
-    else{
-        sModel.location = temp;
-    }
+//    temp= [JSONDic objectForKey:kSessionLocation];
+//    if([temp isEqualToString:@""]){
+//        return @"location can't be empty";
+//    }
+//    else{
+        sModel.location = [JSONDic objectForKey:kSessionLocation];
+//    }
 
-    temp= [JSONDic objectForKey: @"deptName"];
-    if([temp isEqualToString:@""]){
-        return @"location can't be empty";
-    }
-    else{
-        sModel.departmentName = temp;
-    }
+//    temp= [JSONDic objectForKey:kSessionDepartment];
+//    if([temp isEqualToString:@""]){
+//        return @"location can't be empty";
+//    }
+//    else{
+        sModel.departmentName = [JSONDic objectForKey:kSessionDepartment];
+//    }
 
     sModel.scanedTime = [NSDate date];
     sModel.status = @"Open";
     sModel.uploadIndicator = NO;
     
 	NSDateFormatter *f = [[NSDateFormatter alloc] init];
-	[f setDateFormat:Default_DATE_STRING_FORMAT];
+	[f setDateFormat:kDateFormat];
 	NSDate *myDate;
-	temp= [JSONDic objectForKey: @"starttime"];
+	temp= [JSONDic objectForKey:kSessionStartTime];
 	if([temp isEqualToString:@""]){
-        return @"starttime can't be empty";
+        //return @"starttime can't be empty";
+        sModel.startTime = nil;
 	}else{
         myDate = [f dateFromString:temp];
         sModel.startTime = myDate;
     }
     
-	temp= [JSONDic objectForKey: @"endtime"];
+	temp= [JSONDic objectForKey:kSessionEndTime];
 	if([temp isEqualToString:@""]){
-        return @"endtime can't be empty";
+        //return @"endtime can't be empty";
+        sModel.endTime = nil;
 	}else{
         myDate = [f dateFromString:temp];
         sModel.startTime = myDate;

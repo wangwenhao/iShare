@@ -40,21 +40,21 @@
 {
     [super viewDidLoad];
     
-    self.sessionNameLabel.text = [self.sessionDetails objectForKey:@"sessionname"];
-    self.lectureLabel.text = [self.sessionDetails objectForKey:@"lecture"];
-    self.locationLabel.text = [self.sessionDetails objectForKey:@"location"];
-    self.sessionDescLabel.text = [self.sessionDetails objectForKey:@"sessiondesc"];
+    self.sessionNameLabel.text = [self.sessionDetails objectForKey:kSessionName];
+    self.lectureLabel.text = [self.sessionDetails objectForKey:kSessionLecturer];
+    self.locationLabel.text = [self.sessionDetails objectForKey:kSessionLocation];
+    self.sessionDescLabel.text = [self.sessionDetails objectForKey:kSessionDesc];
     [self.sessionDescLabel alignTop];
     
     NSDateFormatter *dateFormater = [[NSDateFormatter alloc]init];
     [dateFormater setDateFormat:kDateFormat];
     
-    NSDate *startTime = [dateFormater dateFromString:[self.sessionDetails objectForKey:@"starttime"]];
+    NSDate *startTime = [dateFormater dateFromString:[self.sessionDetails objectForKey:kSessionStartTime]];
     if (startTime == nil) return;
     
     self.sessionTimeLabel.text = [dateFormater stringFromDate:startTime];
     
-    NSDate *endTime = [dateFormater dateFromString:[self.sessionDetails objectForKey:@"endtime"]];
+    NSDate *endTime = [dateFormater dateFromString:[self.sessionDetails objectForKey:kSessionEndTime]];
     if (endTime != nil)
     {
         NSDateFormatter *timeFormater = [[NSDateFormatter alloc]init];
@@ -72,9 +72,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)saveCurrentSession:(id)sender {
-    
-    //TODO: save here
+- (IBAction)saveCurrentSession:(id)sender
+{
     NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSString *errMsg = [DataHelper saveSessionWithDict:self.sessionDetails withContext:context];
     if (errMsg != nil) {
@@ -82,7 +81,8 @@
         [alert show];
         return;
     }
-
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self.sessionDetails objectForKey:kSessionID] forKey:kCurrentSession];
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
