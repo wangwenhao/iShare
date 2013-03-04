@@ -66,6 +66,40 @@
     NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"attendTime" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sd, nil];
     audiences = [audiencesSet sortedArrayUsingDescriptors:sortDescriptors];
+    
+    UIBarButtonItem *uploadButton = [[UIBarButtonItem alloc]initWithTitle:@"上传" style:UIBarButtonItemStyleBordered target:self action:@selector(uploadData:)];
+    self.navigationItem.rightBarButtonItem = uploadButton;
+}
+
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self resignFirstResponder];
+    [super viewWillAppear:animated];
+}
+
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"You are sharking" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)uploadData:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:@"Doing..." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,8 +111,9 @@
     }
     
     // Configure the cell...
-    Audience *aModel = (Audience *)[audiences objectAtIndex:indexPath.row];
-    cell.textLabel.text =[NSString stringWithFormat:@"%@    %@",aModel.staffID,aModel.staffName];
+    Audience *audience = (Audience *)[audiences objectAtIndex:indexPath.row];
+    cell.textLabel.text = audience.staffID;
+    cell.detailTextLabel.text = audience.staffName;
     
     return cell;
 }
@@ -99,6 +134,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//What's This Code mean?
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";

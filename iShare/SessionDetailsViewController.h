@@ -23,4 +23,5 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 -(id)initWithSessionId:(NSNumber *)sid;
+-(void)uploadData:(id)sender;
 @end
