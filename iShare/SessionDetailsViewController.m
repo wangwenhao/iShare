@@ -77,7 +77,8 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = [(Audience *)[audiences objectAtIndex:indexPath.row] staffName];
+    Audience *aModel = (Audience *)[audiences objectAtIndex:indexPath.row];
+    cell.textLabel.text =[NSString stringWithFormat:@"%@    %@",aModel.staffID,aModel.staffName];
     
     return cell;
 }
@@ -96,6 +97,34 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithFrame:CGRectZero];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        [label setLineBreakMode:NSLineBreakByWordWrapping];
+        [label setMinimumScaleFactor:MIN_SCALE];
+        [label setNumberOfLines:0];
+        [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
+        [label setTag:1];
+        
+        NSDateFormatter *timeFormater = [[NSDateFormatter alloc]init];
+        [timeFormater setDateFormat:kDateFormat];
+        
+        Audience *aModel = (Audience *)[audiences objectAtIndex:indexPath.row];
+        if([aModel.winIndicator isEqualToNumber:[NSNumber numberWithInt:1] ]){
+        label.text =[NSString stringWithFormat:@"%@    %@\n%@   %@\n%@",aModel.staffID,aModel.staffName,@"checked in: @",[timeFormater stringFromDate:aModel.attendTime],@"This dude is very lucky and has won the lottery!"];
+        }else{
+         label.text =[NSString stringWithFormat:@"%@    %@\n%@   %@\n%@",aModel.staffID,aModel.staffName,@"checked in: @",[timeFormater stringFromDate:aModel.attendTime],@"This dude is unlucky."];
+        }
+        
+        [[cell contentView] addSubview:label];
+    }
+
 }
 
 @end

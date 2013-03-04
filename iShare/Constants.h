@@ -45,3 +45,7 @@
 #define kSessionDepartment      @"deptName"
 #define kSessionLocation        @"location"
 #define kSessionDesc            @"desc"
+
+//common UI settings
+#define MIN_SCALE 0.8f
+#define FONT_SIZE 14.0
