@@ -22,6 +22,7 @@
 @synthesize settingViewController;
 @synthesize checkinScanViewController;
 @synthesize currentSessionLabel;
+@synthesize sessionDetaildViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"iShare";
+    
+    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStyleBordered target:self action:@selector(settingButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = settingButton;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -72,34 +77,6 @@
     
     sessionScanViewController = [[SessionScanViewController alloc]initWithNibName:@"SessionScanView" bundle:nil];
     [self.navigationController pushViewController:sessionScanViewController animated:YES];
-    
-//    // ADD: present a barcode reader that scans from the camera feed
-//    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-//    
-//    for (UIView *temp in [reader.view subviews]) {
-//        for (UIView *view in [temp subviews]) {
-//            if ([view isKindOfClass:[UIToolbar class]]) {
-//                for (UIView *button in [view subviews]) {
-//                    if([button isKindOfClass:[UIButton class]] && ((UIButton *)button).buttonType == UIButtonTypeInfoLight)
-//                    {
-//                        [button removeFromSuperview];
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    
-//    reader.readerDelegate = self;
-//    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-//    
-//    ZBarImageScanner *scanner = reader.scanner;
-//    
-//    [scanner setSymbology: ZBAR_I25
-//                   config: ZBAR_CFG_ENABLE
-//                       to: 0];
-//    
-//    // present and release the controller
-//    [self presentViewController:reader animated:YES completion:^(void){}];
 }
 
 - (IBAction)sessionHistoryListButtonTapped:(id)sender {
@@ -107,9 +84,19 @@
     [self.navigationController pushViewController:sessionHistoryListViewController animated:YES];
 }
 
-- (IBAction)settingButtonTapped:(id)sender {
+- (void)settingButtonTapped:(id)sender {
     settingViewController = [[SettingViewController alloc]initWithNibName:@"SettingView" bundle:nil];
     [self.navigationController pushViewController:settingViewController animated:YES];
+}
+
+- (IBAction)lotteryButtonTapped:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:kCurrentSession] == nil) {
+        return;
+    }
+    NSNumber *sessionID = [NSNumber numberWithInteger:[[defaults objectForKey:kCurrentSession] integerValue]];
+    sessionDetaildViewController = [[SessionDetailsViewController alloc]initWithSessionId:sessionID];
+    [self.navigationController pushViewController:sessionDetaildViewController animated:YES];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

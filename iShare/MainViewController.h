@@ -12,6 +12,7 @@
 #import "SessionScanViewController.h"
 #import "CheckinScanViewController.h"
 #import "SettingViewController.h"
+#import "SessionDetailsViewController.h"
 
 @interface MainViewController : UIViewController <ZBarReaderDelegate>
 
@@ -19,10 +20,12 @@
 @property (nonatomic, strong) SessionScanViewController *sessionScanViewController;
 @property (nonatomic, strong) SettingViewController *settingViewController;
 @property (nonatomic, strong) CheckinScanViewController *checkinScanViewController;
+@property (nonatomic, strong) SessionDetailsViewController *sessionDetaildViewController;
 
 - (IBAction)checkinScanButtonTapped:(id)sender;
 - (IBAction)sessionScanButtonTapped:(id)sender;
 - (IBAction)sessionHistoryListButtonTapped:(id)sender;
-- (IBAction)settingButtonTapped:(id)sender;
+- (void)settingButtonTapped:(id)sender;
+- (IBAction)lotteryButtonTapped:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *currentSessionLabel;
 @end
