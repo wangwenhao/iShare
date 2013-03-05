@@ -93,7 +93,17 @@
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"You are sharking" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        //抽奖
+        Audience *obj;
+        int r = arc4random() % [audiences count];
+        if(r < [audiences count])
+            obj = [audiences objectAtIndex:r];
+        else   {     //error message
+            
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:obj.staffID delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -123,6 +133,7 @@
     if(!error)
     {
         NSString *response = [request responseString];
+        //todo
     }
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -134,7 +145,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...

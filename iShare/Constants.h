@@ -46,6 +46,13 @@
 #define kSessionLocation        @"location"
 #define kSessionDesc            @"desc"
 
+//Ticket Json Items
+#define kTicketSessionID        @"sessionId"
+#define kTicketSessionName      @"sessionName"
+#define kTicketUserID           @"userId"
+#define kTicketUserName         @"userName"
+#define kTicketStaffID          @"staffId"
+
 //common UI settings
 #define MIN_SCALE 0.8f
 #define FONT_SIZE 14.0

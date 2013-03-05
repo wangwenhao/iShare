@@ -113,22 +113,21 @@
 }
 
 + (NSString *) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
-    NSString *sessionId= [[JSONDic objectForKey: @"sessionid"] stringValue];
+    NSString *sessionId= [JSONDic objectForKey: kTicketSessionID];
     if([sessionId isEqualToString:@""]){
         return @"sessionId can't be empty";
     }
     NSNumber *sId = [NSNumber numberWithInteger:sessionId.integerValue];
     
-    NSString *temp= [JSONDic objectForKey: @"staffid"];
-    NSString *staffId=nil;
+    NSString *temp = [JSONDic objectForKey: kTicketStaffID];
+    NSString *staffId = nil;
 	if([temp isEqualToString:@""]){
         return @"staffid can't be empty";
     }else{
-        staffId=[NSString stringWithString:temp];
+        staffId = [NSString stringWithString:temp];
     }
     
   	Audience *aModel = [self getAudienceBySessionId:sId andStaffId:staffId inContext:context];
-    
     
     if(aModel == nil){
         aModel = [NSEntityDescription insertNewObjectForEntityForName:AUDIENCEMODEL inManagedObjectContext:context];
@@ -137,7 +136,6 @@
         return @"该员工已签到！";
     }
 
-            
     Session *sModel = [self getSessionForID:sId inContext:context];
     if (sModel == nil) {
         NSString *sValue = temp;
@@ -149,7 +147,7 @@
 	NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
 	[f setNumberStyle:NSNumberFormatterDecimalStyle];
 	NSNumber *myNumber;
-	temp= [[JSONDic objectForKey: @"userid"] stringValue];
+	temp= [JSONDic objectForKey:kTicketUserID];
 	if([temp isEqualToString:@""]){
          	//without userId, this user is manual key in user.
          	aModel.lotteryIndicator = [NSNumber numberWithInt:0];
@@ -171,7 +169,7 @@
         aModel.staffID = staffId;
 //    }
  
-	temp= [JSONDic objectForKey: @"staffname"];
+	temp= [JSONDic objectForKey:kTicketUserName];
 	if([temp isEqualToString:@""]){
         return @"staffname can't be empty";
 	}else{

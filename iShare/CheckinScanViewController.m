@@ -82,10 +82,7 @@
         NSLog(@"%@", symbol.data);
         [reader stop];
         
-        //TODO: Hardcode for testing
-        NSString *jsonString = @"{\"sessionid\":2,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
-        
-        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *jsonData = [symbol.data dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *resultDic = [jsonData objectFromJSONData];
         
         if (![self isValidTicketJson:resultDic]) {
@@ -93,19 +90,18 @@
             alert.tag = kAddAudienceError;
             [alert show];
             return;
-        }        
+        }
         
         NSLog(@"%@", resultDic);
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([[defaults objectForKey:kCurrentSession] integerValue] != [[resultDic objectForKey:@"sessionid"] integerValue]) {
+        if ([[defaults objectForKey:kCurrentSession] integerValue] != [[resultDic objectForKey:kTicketSessionID] integerValue]) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"课程与当前课程不符，你走错教室了吗？" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.tag = kSessionMismatch;
             [alert show];
             return;
         }
         
-        //TODO: save the ticket info.
         NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
         NSString *errMsg = [DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
         
@@ -123,9 +119,9 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == kSessionMismatch) {
+//    if (alertView.tag == kSessionMismatch) {
         [reader start];
-    }
+//    }
 }
 
 - (IBAction)KeyinStaffIDTapped:(id)sender {
@@ -136,11 +132,12 @@
 -(BOOL)isValidTicketJson:(NSDictionary *)JSONDic
 {
     NSArray *key = [JSONDic allKeys];
-    if ([key count] != 4) return NO;
-    if (![key containsObject:@"sessionid"]) return NO;
-    if (![key containsObject:@"userid"]) return NO;
-    if (![key containsObject:@"staffid"]) return NO;
-    if (![key containsObject:@"staffname"]) return NO;
+    if ([key count] != 5) return NO;
+    if (![key containsObject:kTicketUserID]) return NO;
+    if (![key containsObject:kTicketStaffID]) return NO;
+    if (![key containsObject:kTicketUserName]) return NO;
+    if (![key containsObject:kTicketSessionID]) return NO;
+    if (![key containsObject:kTicketSessionName]) return NO;
     
     return YES;
 }
