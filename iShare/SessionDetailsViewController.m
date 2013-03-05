@@ -64,7 +64,7 @@
         }
     }
     
-    NSSet *audiencesSet = session.audiences;
+    NSSet *audiencesSet = session.audiences;//I have inserted 2 audiences, this operation only returns 1 audiences.
     NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"attendTime" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sd, nil];
     audiences = [audiencesSet sortedArrayUsingDescriptors:sortDescriptors];
@@ -147,12 +147,49 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        //        cell = [[UITableViewCell alloc] initWithFrame:CGRectZero];
+        //        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        //        label.tag = 1;
+        //        label.lineBreakMode = NSLineBreakByWordWrapping;
+        //        label.highlightedTextColor = [UIColor whiteColor];
+        //        label.numberOfLines = 0;
+        //        label.opaque = NO;
+        //        label.backgroundColor = [UIColor clearColor];
+        //        [cell.contentView addSubview:label];
+
     }
     
     // Configure the cell...
     Audience *audience = (Audience *)[audiences objectAtIndex:indexPath.row];
     cell.textLabel.text = audience.staffID;
     cell.detailTextLabel.text = audience.staffName;
+    
+    //    UILabel *label = (UILabel *)[cell viewWithTag:1];
+    //    CGRect cellFrame = [cell frame];
+    //    cellFrame.origin = CGPointMake(0, 0);
+    //    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    //    [df setDateFormat:kDateFormat];
+    //    NSString *msg;
+    //    if([audience.winIndicator isEqualToNumber:[NSNumber numberWithInt:1]]){
+    //        msg = @"This dude is lucky and won the lottery!";
+    //    }else{
+    //        msg = @"This dude is unlucky!";
+    //    }
+    //
+    //    label.text = [NSString stringWithFormat:@"%@    %@\n%@  %@\n%@",audience.staffID,audience.staffName,[df stringFromDate:audience.attendTime],audience.userID,msg];
+    //    NSLog(@"Label Text:%@",label.text);
+    //    CGRect rect = CGRectInset(cellFrame, 2, 2);
+    //    label.frame = rect;
+    //    [label sizeToFit];
+    //
+    //    if (label.frame.size.height > 46) {
+    //        cellFrame.size.height = 50 + label.frame.size.height - 46;
+    //    }
+    //    else {
+    //        cellFrame.size.height = 50;
+    //    }
+    //    [cell setFrame:cellFrame];
+    
     
     return cell;
 }
@@ -173,33 +210,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-//What's This Code mean?
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithFrame:CGRectZero];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-        [label setLineBreakMode:NSLineBreakByWordWrapping];
-        [label setMinimumScaleFactor:MIN_SCALE];
-        [label setNumberOfLines:0];
-        [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
-        [label setTag:1];
-        
-        NSDateFormatter *timeFormater = [[NSDateFormatter alloc]init];
-        [timeFormater setDateFormat:kDateFormat];
-        
-        Audience *aModel = (Audience *)[audiences objectAtIndex:indexPath.row];
-        if([aModel.winIndicator isEqualToNumber:[NSNumber numberWithInt:1] ]){
-        label.text =[NSString stringWithFormat:@"%@    %@\n%@   %@\n%@",aModel.staffID,aModel.staffName,@"checked in: @",[timeFormater stringFromDate:aModel.attendTime],@"This dude is very lucky and has won the lottery!"];
-        }else{
-         label.text =[NSString stringWithFormat:@"%@    %@\n%@   %@\n%@",aModel.staffID,aModel.staffName,@"checked in: @",[timeFormater stringFromDate:aModel.attendTime],@"This dude is unlucky."];
-        }
-        
-        [[cell contentView] addSubview:label];
-    }
-
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 @end

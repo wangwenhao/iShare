@@ -53,22 +53,21 @@
 //    
 //    [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:3] andSessionName:@"Session C" andSessionDesc:@"This is Session C for Testing" andLocation:@"7F Cambridge" andDeptName:@"34103001" andLecturer:@"ZY" andStartTime:[dF dateFromString:@"06/03/2013 10:00"]  andEndTime: [dF dateFromString:@"06/03/2013 10:55"]andStatus:@"Opening" inContext:_managedObjectContext];
 //    
-//    NSString *jsonString = @"{\"sessionid\":2,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
+//    NSString *jsonString = @"{\"sessionId\":2,\"userId\":123,\"staffId\":\"300530\",\"userName\":\"Wang Wen Hao\"}";
 //    
 //    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
 //    NSDictionary *resultDic = [jsonData objectFromJSONData];
 //    
-//    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
-//    NSString *errMsg = [DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
+//    NSString *errMsg = [DataHelper saveAudienceWithDict:resultDic withContext:_managedObjectContext];
 //    
 //    if (errMsg != nil) {
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 //        [alert show];
 //    }
 //    
-//jsonString = @"{\"sessionid\":2,\"userid\":234,\"staffid\":\"300531\",\"staffname\":\"Wang Wen Tao\"}";
+//jsonString = @"{\"sessionId\":2,\"userId\":234,\"staffId\":\"300531\",\"userName\":\"Wang Wen Tao\"}";
 //    resultDic = [jsonData objectFromJSONData];
-//    errMsg =[DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
+//    errMsg =[DataHelper saveAudienceWithDict:resultDic withContext:_managedObjectContext];
 //    if (errMsg != nil) {
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 //        [alert show];
