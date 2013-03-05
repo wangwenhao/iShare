@@ -10,6 +10,10 @@
 #import "SessionDetailsViewController.h"
 
 @interface SessionHistoryListViewController : UITableViewController<UIAlertViewDelegate>
+{
+    NSIndexPath *_currentIndex;
+    UITableView *_tv;
+}
 
 @property (strong, nonatomic) NSArray *session;
 @property (strong, nonatomic) SessionDetailsViewController *detailsViewController;

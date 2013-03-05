@@ -9,6 +9,8 @@
 #import "SessionHistoryListViewController.h"
 #import "AppDelegate.h"
 #import "DataHelper.h"
+#import "Constants.h"
+#import "JSONKit.h"
 #define CONFIRM_DELETION 33
 
 @interface SessionHistoryListViewController ()
@@ -41,7 +43,37 @@
         NSLog(@"After managedObjectContext: %@",  _managedObjectContext);
     }
     
-    
+//    NSDateFormatter *dF = [[NSDateFormatter alloc] init];
+//    [dF setDateFormat:kDateFormat];
+//    
+//    [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:1] andSessionName:@"Session A" andSessionDesc:@"This is Session A for Testing" andLocation:@"7F Cambridge" andDeptName:@"34103001" andLecturer:@"Henry Pan" andStartTime:[NSDate date] andEndTime: [dF dateFromString:@"05/03/2013 23:55"]andStatus:@"Opening" inContext:_managedObjectContext];
+//    
+//    
+//    [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:2] andSessionName:@"Session B" andSessionDesc:@"This is Session B for Testing" andLocation:@"8F Oxford" andDeptName:@"34103001" andLecturer:@"WJY" andStartTime:[dF dateFromString:@"06/03/2013 10:00"] andEndTime: [dF dateFromString:@"06/03/2013 11:55"]andStatus:@"Opening" inContext:_managedObjectContext];
+//    
+//    [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:3] andSessionName:@"Session C" andSessionDesc:@"This is Session C for Testing" andLocation:@"7F Cambridge" andDeptName:@"34103001" andLecturer:@"ZY" andStartTime:[dF dateFromString:@"06/03/2013 10:00"]  andEndTime: [dF dateFromString:@"06/03/2013 10:55"]andStatus:@"Opening" inContext:_managedObjectContext];
+//    
+//    NSString *jsonString = @"{\"sessionid\":2,\"userid\":123,\"staffid\":\"300530\",\"staffname\":\"Wang Wen Hao\"}";
+//    
+//    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+//    NSDictionary *resultDic = [jsonData objectFromJSONData];
+//    
+//    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+//    NSString *errMsg = [DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
+//    
+//    if (errMsg != nil) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//    }
+//    
+//jsonString = @"{\"sessionid\":2,\"userid\":234,\"staffid\":\"300531\",\"staffname\":\"Wang Wen Tao\"}";
+//    resultDic = [jsonData objectFromJSONData];
+//    errMsg =[DataHelper saveAudienceWithDict:resultDic withContext:managedObjectContext];
+//    if (errMsg != nil) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//    }
+
     session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -99,22 +131,18 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _currentIndex = indexPath;
+    _tv = tableView;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         Session *sModel =(Session *)[session objectAtIndex:indexPath.row];
-        if(sModel.uploadIndicator){
+        if([sModel.uploadIndicator isEqualToNumber:[NSNumber numberWithInt:0]]){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程还未上传数据，如果删除，数据将无法恢复。您确认要删除？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"删除",nil];
             alert.tag = CONFIRM_DELETION;
             [alert show];
 
-        }
-        
-        NSError *err =[DataHelper deleteSessionWithSession:sModel withContext:_managedObjectContext];
-        if(err == nil){
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }else{
-            NSLog(@"Error occured:%@,%@",err, err.userInfo);
-            abort();
+            [self deleteDataAtIndex:_currentIndex];
         }
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -130,6 +158,7 @@
                     
                     break;
                 case 1://delete
+                    [self  deleteDataAtIndex:_currentIndex];
                     break;
                 default:
                     NSLog(@"SessionHistoryListViewController.alertView: clickedButtonAtIndex. Unknown button.");
@@ -143,7 +172,21 @@
     }
 }
 
-
+-(void) deleteDataAtIndex:(NSIndexPath *)indexPath{
+    Session *sModel = (Session *)[session objectAtIndex:_currentIndex.row];
+    NSError *err = [DataHelper deleteSessionWithSession:sModel withContext:_managedObjectContext];
+    
+    if(err == nil){
+        session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
+        [_tv reloadData];
+        
+    }else{
+        NSLog(@"Error occured:%@,%@",err, err.userInfo);
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"出错啦！！" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [av show];
+    }
+    
+}
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath

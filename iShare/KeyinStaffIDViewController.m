@@ -8,6 +8,8 @@
 
 #import "KeyinStaffIDViewController.h"
 #import "Constants.h"
+#import "DataHelper.h"
+#import "AppDelegate.h"
 
 @interface KeyinStaffIDViewController ()
 
@@ -45,6 +47,8 @@
     NSNumber *sessionID = [NSNumber numberWithInteger:[[defaults objectForKey:kCurrentSession] integerValue]];
     NSString *staffID = _staffID.text;
     //TODO: save the ticket info.
+    NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    [DataHelper keyInAudienceWithSessionId:sessionID andStaffId:staffID inContext:context];
     
     [self dismissViewControllerAnimated:YES completion:^{
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];

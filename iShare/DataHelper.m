@@ -349,7 +349,7 @@
     NSFetchRequest *query = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:SESSIONMODEL inManagedObjectContext:context];
     query.entity = entity;
-    query.fetchLimit = 1;
+    //query.fetchLimit = 1;
     
     NSString *sql = [NSString stringWithFormat:@"%@==%@", @"sessionID", @"%@"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:sessionId]];
@@ -412,7 +412,10 @@
     //query.fetchLimit = 100;
     
     NSString *sql = [NSString stringWithFormat:@"%@==%@", @"session.sessionID", @"%@"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:sessionId]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:sql, sessionId];
+    //[NSPredicate predicateWithFormat:sql argumentArray:[NSArray arrayWithObject:sessionId]];
+    
+    
     query.predicate = predicate;
     
     // Edit the sort key as appropriate.
