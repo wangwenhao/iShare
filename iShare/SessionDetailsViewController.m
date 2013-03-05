@@ -10,6 +10,8 @@
 #import "DataHelper.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "ASIFormDataRequest.h"
+#import "JSONKit.h"
 
 @interface SessionDetailsViewController ()
 
@@ -98,7 +100,32 @@
 
 -(void)uploadData:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:@"Doing..." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    NSMutableArray *jsonList = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *d = nil;
+    
+    for (Audience *audience in session.audiences) {
+        d = [[NSMutableDictionary alloc] init];
+        [d setObject:session.sessionID forKey:JSON_PARAM_SESSION_ID];
+        [d setObject:audience.userID forKey:[NSString stringWithFormat:JSON_PARAM_USER_ID]];
+        [jsonList addObject:d];
+    }
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, UPLOAD_URI]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_ID];
+    [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_PASSWORD];
+    [request setPostValue:[jsonList JSONString] forKey:PARAM_NAME_JSON_LIST];
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    
+    if(!error)
+    {
+        NSString *response = [request responseString];
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 

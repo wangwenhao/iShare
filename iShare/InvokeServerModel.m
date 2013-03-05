@@ -62,7 +62,7 @@
             }
             else
             {
-                NSLog(@"Occur an error: %@, %@", connectionErr, connectionErr.userInfo);
+                NSLog(@"Occur an error: %@", connectionErr.userInfo);
                 if([self.delegate respondsToSelector:@selector(faildRequest:)])
                 {
                     [self.delegate faildRequest:connectionErr];
