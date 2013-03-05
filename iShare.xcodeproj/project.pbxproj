@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B52571E416E61AB600DF547B /* ConnectToIShare.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571E116E6196800DF547B /* ConnectToIShare.m */; };
+		B52571E516E61AB600DF547B /* InvokeServerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571E316E6196800DF547B /* InvokeServerModel.m */; };
 		B53970C116DCE1FE00CE490C /* DataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970BE16DCE04200CE490C /* DataHelper.m */; };
 		B53970C216DCE21500CE490C /* SessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970B916DCE00200CE490C /* SessionModel.m */; };
 		B53970C316DCE21500CE490C /* AudienceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970BB16DCE03000CE490C /* AudienceModel.m */; };
@@ -57,6 +59,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B52571E016E6196800DF547B /* ConnectToIShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectToIShare.h; sourceTree = "<group>"; };
+		B52571E116E6196800DF547B /* ConnectToIShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectToIShare.m; sourceTree = "<group>"; };
+		B52571E216E6196800DF547B /* InvokeServerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvokeServerModel.h; sourceTree = "<group>"; };
+		B52571E316E6196800DF547B /* InvokeServerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvokeServerModel.m; sourceTree = "<group>"; };
 		B53970B816DCE00200CE490C /* SessionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SessionModel.h; sourceTree = "<group>"; };
 		B53970B916DCE00200CE490C /* SessionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SessionModel.m; sourceTree = "<group>"; };
 		B53970BA16DCE03000CE490C /* AudienceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudienceModel.h; sourceTree = "<group>"; };
@@ -166,6 +172,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B52571DF16E6194400DF547B /* iShareService */ = {
+			isa = PBXGroup;
+			children = (
+				B52571E016E6196800DF547B /* ConnectToIShare.h */,
+				B52571E116E6196800DF547B /* ConnectToIShare.m */,
+				B52571E216E6196800DF547B /* InvokeServerModel.h */,
+				B52571E316E6196800DF547B /* InvokeServerModel.m */,
+			);
+			name = iShareService;
+			sourceTree = "<group>";
+		};
 		B53970B716DCDE2700CE490C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +240,7 @@
 		B55F8D5E16D3ADB200870665 /* iShare */ = {
 			isa = PBXGroup;
 			children = (
+				B52571DF16E6194400DF547B /* iShareService */,
 				B5B7E4F216DE330400DBB201 /* JSONKit */,
 				B53970C416DCE49600CE490C /* DataModels */,
 				B53970B716DCDE2700CE490C /* Resources */,
@@ -434,6 +452,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B52571E416E61AB600DF547B /* ConnectToIShare.m in Sources */,
+				B52571E516E61AB600DF547B /* InvokeServerModel.m in Sources */,
 				B53970C216DCE21500CE490C /* SessionModel.m in Sources */,
 				B53970C316DCE21500CE490C /* AudienceModel.m in Sources */,
 				B53970C116DCE1FE00CE490C /* DataHelper.m in Sources */,

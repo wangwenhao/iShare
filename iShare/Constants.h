@@ -49,3 +49,12 @@
 //common UI settings
 #define MIN_SCALE 0.8f
 #define FONT_SIZE 14.0
+
+//UploadService
+#define SERVER_URL @"http://192.168.81.131:8000/mobil/batch"
+#define UPLOAD_URI @"/upload/attendance"
+#define PARAM_NAME_ACCOUNT_ID @"account_id"
+#define PARAM_NAME_ACCOUNT_PASSWORD @"account_password"
+#define PARAM_NAME_JSON_LIST @"json_list"
+#define JSON_PARAM_USER_ID @"userId"
+#define JSON_PARAM_SESSION_ID @"sessionId"
