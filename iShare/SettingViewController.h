@@ -13,6 +13,6 @@
 @property (nonatomic, strong) UILabel *awardCount;
 @property (nonatomic, strong) UISlider *slider;
 
--(IBAction)sliderValueChanged:(id)sender;
+-(void)sliderValueChanged:(id)sender;
 
 @end

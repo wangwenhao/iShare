@@ -27,6 +27,7 @@
 #define kEnabledVibrate         @"enabled_vibrate"
 #define kSliderAwardCount       @"slider_awardCount"
 #define kCurrentSession         @"session_current"
+#define kServerSetting          @"server_setting"
 
 //DateFormat
 #define kDateFormat             @"yyyy-MM-dd HH:mm:ss"

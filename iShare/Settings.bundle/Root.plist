@@ -52,6 +52,26 @@
 			<key>Type</key>
 			<string>PSSliderSpecifier</string>
 		</dict>
+		<dict>
+			<key>Titles</key>
+			<array>
+				<string>Testing</string>
+				<string>Production</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>http://192.168.81.131:8000/mobil/batch/upload/attendance</string>
+				<string>http://192.168.81.131/mobil/batch/upload/attendance</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Server Setting</string>
+			<key>Key</key>
+			<string>server_setting</string>
+			<key>DefaultValue</key>
+			<string>http://192.168.81.131:8000/mobil/batch/upload/attendance</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>

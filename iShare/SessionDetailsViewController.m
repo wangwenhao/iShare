@@ -121,7 +121,8 @@
         [jsonList addObject:d];
     }
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, UPLOAD_URI]];
+    NSURL *url = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:kServerSetting]];
+    //[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, UPLOAD_URI]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_ID];
     [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_PASSWORD];

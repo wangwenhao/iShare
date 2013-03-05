@@ -23,7 +23,7 @@
         // 加载默认配置
         [self performSelector:@selector(registerDefaultsFromSettingsBundle)];
     }
-    name = [[NSUserDefaults standardUserDefaults] stringForKey:@"enabled_sound"];
+    //name = [[NSUserDefaults standardUserDefaults] stringForKey:@"enabled_sound"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

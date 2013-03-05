@@ -121,29 +121,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iShare/SessionDetailsViewController.m"
-         timestampString = "384186054.939984"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "20"
-         endingLineNumber = "20"
-         landmarkName = "@implementation SessionDetailsViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "iShare/AppDelegate.m"
-         timestampString = "384187097.508003"
+         filePath = "iShare/SessionDetailsViewController.m"
+         timestampString = "384188399.239437"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "28"
-         endingLineNumber = "28"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         startingLineNumber = "126"
+         endingLineNumber = "126"
+         landmarkName = "-uploadData:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
