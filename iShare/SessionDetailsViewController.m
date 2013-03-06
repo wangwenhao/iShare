@@ -141,6 +141,8 @@
     
     [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
     
+    //TODO: Need to save to database
+    
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"获奖名单" message:result delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 

@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *staffID;
 - (IBAction)saveNoRegistedStaff:(id)sender;
+- (IBAction)cancelButtonTapped:(id)sender;
 
 @end
