@@ -62,6 +62,7 @@
 //common UI settings
 #define MIN_SCALE 0.8f
 #define FONT_SIZE 14.0
+#define DEFAULT_CELL_HEIGHT 66.0
 
 //UploadService
 #define SERVER_URL @"http://192.168.81.131:8000/mobil/batch"

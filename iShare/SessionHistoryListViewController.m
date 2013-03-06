@@ -45,7 +45,7 @@
     
 //    NSDateFormatter *dF = [[NSDateFormatter alloc] init];
 //    [dF setDateFormat:kDateFormat];
-//    
+//
 //    [DataHelper scannedInSessionWithSessionId:[NSNumber numberWithInt:1] andSessionName:@"Session A" andSessionDesc:@"This is Session A for Testing" andLocation:@"7F Cambridge" andDeptName:@"34103001" andLecturer:@"Henry Pan" andStartTime:[NSDate date] andEndTime: [dF dateFromString:@"05/03/2013 23:55"]andStatus:@"Opening" inContext:_managedObjectContext];
 //    
 //    
@@ -66,13 +66,14 @@
 //    }
 //    
 //jsonString = @"{\"sessionId\":2,\"userId\":234,\"staffId\":\"300531\",\"userName\":\"Wang Wen Tao\"}";
+//    jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
 //    resultDic = [jsonData objectFromJSONData];
 //    errMsg =[DataHelper saveAudienceWithDict:resultDic withContext:_managedObjectContext];
 //    if (errMsg != nil) {
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:[NSString stringWithFormat:@"数据错误:%@",errMsg] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 //        [alert show];
 //    }
-
+//
     session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
     
     // Uncomment the following line to preserve selection between presentations.

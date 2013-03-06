@@ -14,6 +14,7 @@
     NSNumber *sessionId;
     Session *session;
     NSArray *audiences;
+    NSIndexPath *currentIndex;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *sessionNameLabel;
