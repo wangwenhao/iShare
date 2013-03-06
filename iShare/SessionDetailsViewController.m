@@ -144,6 +144,7 @@
     [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
     
     //TODO: Need to save to database
+    [DataHelper updateAudienceWithAwardList:awardList];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"获奖名单" message:result delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
@@ -167,7 +168,7 @@
 -(void)doUploadData
 {
     NSMutableArray *jsonList = [[NSMutableArray alloc] init];
-    
+    NSMutableOrderedSet *sessionIdList = [[NSMutableOrderedSet alloc]init];
     NSMutableDictionary *d = nil;
     
     for (Audience *audience in session.audiences) {
@@ -175,6 +176,7 @@
         [d setObject:session.sessionID forKey:JSON_PARAM_SESSION_ID];
         [d setObject:audience.staffID forKey:[NSString stringWithFormat:JSON_PARAM_USER_ID]];
         [jsonList addObject:d];
+        [sessionIdList addObject:session];
     }
     
     NSURL *url = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:kServerSetting]];
@@ -191,6 +193,10 @@
     {
         NSString *response = [request responseString];
         //todo
+        if([response isEqualToString:@"Successful"]){
+            [DataHelper updateSessionWithSessionList:sessionIdList andUploadStatus:[NSNumber numberWithInt:1]];
+        }
+        
     }
     
     [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
@@ -204,59 +210,59 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        if(currentIndex != nil
-           && [currentIndex compare:indexPath] == NSOrderedSame){
-            cell = [[UITableViewCell alloc] initWithFrame:CGRectZero];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-            label.tag = 1;
-            label.lineBreakMode = NSLineBreakByWordWrapping;
-            label.highlightedTextColor = [UIColor whiteColor];
-            label.numberOfLines = 0;
-            label.opaque = NO;
-            label.backgroundColor = [UIColor clearColor];
-            [cell.contentView addSubview:label];
-
-        }else{
+//        if(currentIndex != nil
+//           && [currentIndex compare:indexPath] == NSOrderedSame){
+//            cell = [[UITableViewCell alloc] initWithFrame:CGRectZero];
+//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+//            label.tag = 1;
+//            label.lineBreakMode = NSLineBreakByWordWrapping;
+//            label.highlightedTextColor = [UIColor whiteColor];
+//            label.numberOfLines = 0;
+//            label.opaque = NO;
+//            label.backgroundColor = [UIColor clearColor];
+//            [cell.contentView addSubview:label];
+//
+//        }else{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        }
+//        }
 
     }
     
     // Configure the cell...
     Audience *audience = (Audience *)[audiences objectAtIndex:indexPath.row];
-    if(currentIndex != nil
-       && [currentIndex compare:indexPath] == NSOrderedSame){
-            UILabel *label = (UILabel *)[cell viewWithTag:1];
-            CGRect cellFrame = [cell frame];
-            cellFrame.origin = CGPointMake(0, 0);
-            NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            [df setDateFormat:kDateFormat];
-            NSString *msg;
-            if([audience.winIndicator isEqualToNumber:[NSNumber numberWithInt:1]]){
-                    msg = @"This dude is lucky and won the lottery!";
-            }else{
-                    msg = @"This dude is unlucky!";
-            }
-        
-            label.text = [NSString stringWithFormat:@"Staff Id:%@\nStaff Name:%@\nAttended at:%@\nUser ID:%@\nRemarks:%@",audience.staffID,audience.staffName,[df stringFromDate:audience.attendTime],audience.userID,msg];
-            //NSLog(@"Label Text:%@",label.text);
-            CGRect rect = CGRectInset(cellFrame, 2, 2);
-            label.frame = rect;
-            [label sizeToFit];
-        
-            if (label.frame.size.height > 46) {
-                cellFrame.size.height = 50 + label.frame.size.height - 46;
-            }
-            else {
-                cellFrame.size.height = 50;
-            }
-            [cell setFrame:cellFrame];
-        
-    }
-    else{
+//    if(currentIndex != nil
+//       && [currentIndex compare:indexPath] == NSOrderedSame){
+//            UILabel *label = (UILabel *)[cell viewWithTag:1];
+//            CGRect cellFrame = [cell frame];
+//            cellFrame.origin = CGPointMake(0, 0);
+//            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//            [df setDateFormat:kDateFormat];
+//            NSString *msg;
+//            if([audience.winIndicator isEqualToNumber:[NSNumber numberWithInt:1]]){
+//                    msg = @"This dude is lucky and won the lottery!";
+//            }else{
+//                    msg = @"This dude is unlucky!";
+//            }
+//        
+//            label.text = [NSString stringWithFormat:@"Staff Id:%@\nStaff Name:%@\nAttended at:%@\nUser ID:%@\nRemarks:%@",audience.staffID,audience.staffName,[df stringFromDate:audience.attendTime],audience.userID,msg];
+//            //NSLog(@"Label Text:%@",label.text);
+//            CGRect rect = CGRectInset(cellFrame, 2, 2);
+//            label.frame = rect;
+//            [label sizeToFit];
+//        
+//            if (label.frame.size.height > 46) {
+//                cellFrame.size.height = 50 + label.frame.size.height - 46;
+//            }
+//            else {
+//                cellFrame.size.height = 50;
+//            }
+//            [cell setFrame:cellFrame];
+//        
+//    }
+//    else{
         cell.textLabel.text = audience.staffID;
         cell.detailTextLabel.text = audience.staffName;
-    }
+//    }
     
     return cell;
 }
@@ -277,7 +283,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+/* - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 //    if(currentIndex != nil && [currentIndex compare:indexPath] == NSOrderedSame){
@@ -286,14 +292,14 @@
     currentIndex = indexPath;
     
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:currentIndex] withRowAnimation:UITableViewRowAnimationNone];
-}
+}*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(currentIndex != nil
-       && [currentIndex compare:indexPath] == NSOrderedSame){
-        return DEFAULT_CELL_HEIGHT*2;
-    }
+//    if(currentIndex != nil
+//       && [currentIndex compare:indexPath] == NSOrderedSame){
+//        return DEFAULT_CELL_HEIGHT*2;
+//    }
     return DEFAULT_CELL_HEIGHT;
 }
 

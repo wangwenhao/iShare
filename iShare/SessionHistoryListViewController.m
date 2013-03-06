@@ -136,7 +136,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         Session *sModel =(Session *)[session objectAtIndex:indexPath.row];
-        if([sModel.uploadIndicator isEqualToNumber:[NSNumber numberWithInt:0]]){
+        if([sModel.uploadIndicator isEqualToNumber:[NSNumber numberWithBool:NO]]){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程还未上传数据，如果删除，数据将无法恢复。您确认要删除？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"删除",nil];
             alert.tag = CONFIRM_DELETION;
             [alert show];

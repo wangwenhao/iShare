@@ -8,6 +8,7 @@
 
 #import "DataHelper.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @implementation DataHelper
 
@@ -112,6 +113,14 @@
     }
 }
 
++ (void) updateAudienceWithAwardList:(NSMutableArray *)list{
+    for (Audience *temp in list) {
+        temp.winIndicator = [NSNumber numberWithInt:1];
+    }
+    NSManagedObjectContext *context =[(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    [self saveContext:context];
+}
+
 + (NSString *) saveAudienceWithDict:(NSDictionary *)JSONDic withContext:(NSManagedObjectContext *)context{
     NSString *sessionId= [JSONDic objectForKey: kTicketSessionID];
     if([sessionId isEqualToString:@""]){
@@ -188,9 +197,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程已扫描。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
         return nil;
-//        NSString *sValue = [sessionId stringValue];
-//        NSLog(@"already exist the session with SessionId= %@, just return the session from context.", sValue);
-//	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = sessionId;
@@ -219,9 +225,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程已扫描。" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
         return nil;
-//        NSString *sValue = [sessionId stringValue];
-//        NSLog(@"already exist the session with SessionId= %@,just return the session from context.", sValue);
-	    //abort();
     } else {
         sModel = [NSEntityDescription insertNewObjectForEntityForName:SESSIONMODEL inManagedObjectContext:context];
         sModel.sessionID = sessionId;
@@ -233,7 +236,7 @@
         sModel.lecturer = lecturer;
         sModel.startTime = startTime;
         sModel.endTime = endTime;
-        sModel.status = @"Open";
+        sModel.status = @"Openning";
         sModel.uploadIndicator = NO;
         [self saveContext:context];
     }
@@ -297,7 +300,7 @@
 //    }
 
     sModel.scanedTime = [NSDate date];
-    sModel.status = @"Open";
+    sModel.status = @"Openning";
     sModel.uploadIndicator = NO;
     
 	NSDateFormatter *f = [[NSDateFormatter alloc] init];
@@ -324,6 +327,29 @@
   	[self saveContext:context];
     
    	return nil;
+}
+
++ (bool) updateSessionWithSessionId:(NSNumber *)sId andUploadStatus:(NSNumber *)uploadFlag
+{
+   NSManagedObjectContext *context =[(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    Session *sModel = [self getSessionForID:sId inContext:context];
+    
+    sModel.uploadIndicator = uploadFlag;
+    
+    [self saveContext:context];
+    
+    return YES;
+}
+
++(void) updateSessionWithSessionList:(NSMutableOrderedSet *)sList andUploadStatus:(NSNumber *)uploadFlag
+{
+    NSManagedObjectContext *context =[(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+   
+    for (Session *object in sList) {
+        object.uploadIndicator = uploadFlag;
+    }
+    
+    [self saveContext:context];
 }
 
 + (NSError *) deleteSessionWithSessionId:(NSNumber *)sessionId withContext:(NSManagedObjectContext *) context{
@@ -366,8 +392,8 @@
     NSError *error = nil;
     NSArray *result = [context executeFetchRequest:query error:&error];
     if (result == nil) {
-        NSLog(@"Occur an error: %@, %@", error, error.userInfo);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"查询课程发生错误。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     } else if ([result count] > 0) {
         session = [result objectAtIndex:0];
     }
@@ -396,8 +422,9 @@
 
 	if (error != nil) {
    	    //Deal with failure
-   	    NSLog(@"Occur an error: %@, %@", error, error.userInfo);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取课程列表错误。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return nil;
 	}
 	else {
    	    //Deal with success
@@ -423,19 +450,17 @@
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     [query setSortDescriptors:sortDescriptors];
-    //[sortDescriptor release]; //todo: need check release
     
     NSMutableArray *aModels = nil;
     NSError *error = nil;
     NSArray *result = [context executeFetchRequest:query error:&error];
     if (result == nil) {
-        NSLog(@"Occur an error: %@, %@", error, error.userInfo);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取观众列表发生错误。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     } else if ([result count] > 0) {
         aModels = [result mutableCopy];
     }
     
-    //[query release];//todo: need check release
     return aModels;
 }
 
@@ -460,8 +485,8 @@
     NSError *error = nil;
     NSArray *result = [context executeFetchRequest:query error:&error];
     if (result == nil) {
-        NSLog(@"Occur an error: %@, %@", error, error.userInfo);
-	    abort();
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取观众发生错误。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     } else if ([result count] > 0) {
         aModel = [result objectAtIndex:0];
     }
@@ -501,7 +526,8 @@
          abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"错误" message:@"保存数据发生错误！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
     }
 }
 
