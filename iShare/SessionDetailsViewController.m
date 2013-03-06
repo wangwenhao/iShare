@@ -150,6 +150,20 @@
 
 -(void)uploadData:(id)sender
 {
+    waitingAlert = [[UIAlertView alloc]initWithTitle:@"请稍等" message:@"\n\n\n\n" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    [waitingAlert show];
+    
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activity.center = CGPointMake(CGRectGetMidX(waitingAlert.bounds), CGRectGetMidY(waitingAlert.bounds));
+    [activity startAnimating];
+    
+    [waitingAlert addSubview:activity];
+    
+    [self performSelector:@selector(doUploadData) withObject:nil afterDelay:1];
+}
+
+-(void)doUploadData
+{
     NSMutableArray *jsonList = [[NSMutableArray alloc] init];
     
     NSMutableDictionary *d = nil;
@@ -157,7 +171,7 @@
     for (Audience *audience in session.audiences) {
         d = [[NSMutableDictionary alloc] init];
         [d setObject:session.sessionID forKey:JSON_PARAM_SESSION_ID];
-        [d setObject:audience.userID forKey:[NSString stringWithFormat:JSON_PARAM_USER_ID]];
+        [d setObject:audience.staffID forKey:[NSString stringWithFormat:JSON_PARAM_USER_ID]];
         [jsonList addObject:d];
     }
     
@@ -176,6 +190,8 @@
         NSString *response = [request responseString];
         //todo
     }
+    
+    [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
