@@ -54,6 +54,11 @@
 #define kTicketUserName         @"userName"
 #define kTicketStaffID          @"staffId"
 
+//Notification Name
+#define kSessionScanStartNotification @"SessionScanStart"
+#define kCheckinScanStartNotification @"CheckinScanStart"
+#define kPopViewControllerNofitication @"PopViewController"
+
 //common UI settings
 #define MIN_SCALE 0.8f
 #define FONT_SIZE 14.0

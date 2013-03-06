@@ -83,13 +83,15 @@
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self.sessionDetails objectForKey:kSessionID] forKey:kCurrentSession];
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPopViewControllerNofitication object:nil];
+    }];
 }
 
 - (IBAction)rescan:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter postNotification:[NSNotification notificationWithName:@"SessionScanStart" object:nil]];
+        [notificationCenter postNotification:[NSNotification notificationWithName:kSessionScanStartNotification object:nil]];
     }];
 }
 @end

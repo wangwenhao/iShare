@@ -18,6 +18,7 @@
 @end
 
 @implementation SessionDetailsViewController
+@synthesize waitingAlert;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,18 +95,55 @@
 {
     if (motion == UIEventSubtypeMotionShake) {
         
-        //抽奖
+         waitingAlert = [[UIAlertView alloc]initWithTitle:@"请稍等" message:@"\n\n\n\n" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [waitingAlert show];
+        
+        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activity.center = CGPointMake(CGRectGetMidX(waitingAlert.bounds), CGRectGetMidY(waitingAlert.bounds));
+        [activity startAnimating];
+        
+        [waitingAlert addSubview:activity];
+        
+        [self performSelector:@selector(getLottery:) withObject:nil afterDelay:5];
+    }
+}
+
+-(void)getLottery:(id)sender
+{
+    int awardCount = [[NSUserDefaults standardUserDefaults] integerForKey:kSliderAwardCount];
+    NSMutableArray *awardList = [[NSMutableArray alloc]init];
+    
+    int totalMember = 0;
+    for (Audience *obj in audiences) {
+        if ([obj.lotteryIndicator boolValue] == YES) {
+            totalMember++;
+        }
+    }
+    
+    while (awardList.count < awardCount) {
+        if (awardList.count == totalMember) break;
         Audience *obj;
         int r = arc4random() % [audiences count];
         if(r < [audiences count])
+        {
             obj = [audiences objectAtIndex:r];
-        else   {     //error message
-            
+            if ([obj.lotteryIndicator boolValue] == YES && ![awardList containsObject:obj]) {
+                [awardList addObject:obj];
+            }
         }
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:obj.staffID delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
     }
+    
+    NSString *result = @"";
+    
+    for (Audience *obj in awardList) {
+        result = [NSString stringWithFormat:@"%@\n%@ - %@", result, obj.staffID, obj.staffName];
+    }
+    
+    [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"获奖名单" message:result delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+
 }
 
 -(void)uploadData:(id)sender

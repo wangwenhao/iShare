@@ -57,7 +57,7 @@
     [reader start];
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(scanStart:) name:@"CheckinScanStart" object:nil];
+    [notificationCenter addObserver:self selector:@selector(scanStart:) name:kCheckinScanStartNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -68,13 +68,13 @@
 -(void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([(NSNumber *)[defaults objectForKey:@"enabled_sound"] boolValue]) {
+    if ([(NSNumber *)[defaults objectForKey:kEnabledSound] boolValue]) {
         NSURL *filePath = [[NSBundle mainBundle]URLForResource:@"da" withExtension:@"wav"];
         AudioServicesCreateSystemSoundID(CFBridgingRetain(filePath), &soundID);
         AudioServicesPlaySystemSound(soundID);
     }
     
-    if ([(NSNumber *)[defaults objectForKey:@"enabled_vibrate"] boolValue]) {
+    if ([(NSNumber *)[defaults objectForKey:kEnabledVibrate] boolValue]) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
     

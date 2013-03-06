@@ -23,5 +23,6 @@
 
 -(BOOL) isValidSessionJson:(NSDictionary *)JSONDic;
 -(void) scanStart:(id) sender;
+-(void) popViewController:(id) sender;
 
 @end

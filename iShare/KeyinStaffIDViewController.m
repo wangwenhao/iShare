@@ -52,7 +52,7 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter postNotification:[NSNotification notificationWithName:@"CheckinScanStart" object:nil]];
+        [notificationCenter postNotification:[NSNotification notificationWithName:kCheckinScanStartNotification object:nil]];
     }];
 }
 

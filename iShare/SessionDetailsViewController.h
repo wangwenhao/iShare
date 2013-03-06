@@ -21,7 +21,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *sessionLocationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *sessionTimeLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIAlertView *waitingAlert;
 
 -(id)initWithSessionId:(NSNumber *)sid;
 -(void)uploadData:(id)sender;
+-(void)getLottery:(id)sender;
 @end
