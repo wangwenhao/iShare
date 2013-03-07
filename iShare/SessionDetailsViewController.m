@@ -153,6 +153,12 @@
 
 -(void)uploadData:(id)sender
 {
+    if ([session.uploadIndicator boolValue] == YES) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"此课程信息已经上传过了" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
     waitingAlert = [[UIAlertView alloc]initWithTitle:@"请稍等" message:@"\n\n\n\n" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
     [waitingAlert show];
     
@@ -188,20 +194,32 @@
     [request startSynchronous];
     
     NSError *error = [request error];
+    NSString *message = @"";
     
     if(!error)
     {
         NSString *response = [request responseString];
-        //todo
-        if([response isEqualToString:@"Successful"]){
-            [DataHelper updateSessionWithSessionList:sessionIdList andUploadStatus:[NSNumber numberWithInt:1]];
-        }
+//        NSString *successResult = @"{\"status\": \"success\", \"data\": [{\"staffId\":\"300999\",\"sessionId\":\"2\"},{\"staffId\":\"300888\",\"sessionId\":\"2\"},{\"staffId\":\"300777\",\"sessionId\":\"2\"}]}";
+//        NSString *failureResult = @"{\"status\": \"failure\", \"data\": [{\"staffId\":\"300999\",\"sessionId\":\"2\"},{\"staffId\":\"300888\",\"sessionId\":\"2\"},{\"staffId\":\"300777\",\"sessionId\":\"2\"}], \"error\": \"invalid syntax (<string>, line 1)\"}";
         
+        NSData *resultData = [response dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *resultDic = [resultData objectFromJSONData];
+        
+        if ([[resultDic objectForKey:@"status"] isEqualToString:@"success"]) {
+            [DataHelper updateSessionWithSessionList:sessionIdList andUploadStatus:[NSNumber numberWithInt:1]];
+            message = @"上传成功";
+        } else {
+            if ([[resultDic allKeys]containsObject:@"error"]) {
+                message = [resultDic objectForKey:@"error"];
+            }
+        }
+    } else {
+        message = error.localizedDescription;
     }
     
     [waitingAlert dismissWithClickedButtonIndex:0 animated:YES];
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
