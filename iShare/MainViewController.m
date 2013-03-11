@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "DataHelper.h"
 #import "AppDelegate.h"
+#import "ASIFormDataRequest.h"
 
 @interface MainViewController ()
 
@@ -51,6 +52,8 @@
     if ([defaults objectForKey:kCurrentSession] != nil) {
         NSNumber *sessionId = [NSNumber numberWithInteger:[[defaults objectForKey:kCurrentSession] integerValue]];
         self.currentSessionLabel.text = [[DataHelper getSessionForID:sessionId inContext:context] sessionName];
+    } else {
+        self.currentSessionLabel.text = @"还没有扫描课程信息";
     }
 }
 

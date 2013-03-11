@@ -136,7 +136,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         Session *sModel =(Session *)[session objectAtIndex:indexPath.row];
-        if([sModel.uploadIndicator isEqualToNumber:[NSNumber numberWithBool:NO]]){
+        if([sModel.uploadIndicator boolValue] == NO){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该课程还未上传数据，如果删除，数据将无法恢复。您确认要删除？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"删除",nil];
             alert.tag = CONFIRM_DELETION;
             [alert show];
@@ -174,9 +174,14 @@
 
 -(void) deleteDataAtIndex:(NSIndexPath *)indexPath{
     Session *sModel = (Session *)[session objectAtIndex:_currentIndex.row];
+    NSNumber *deleteSessionID = sModel.sessionID;
     NSError *err = [DataHelper deleteSessionWithSession:sModel withContext:_managedObjectContext];
     
     if(err == nil){
+        NSNumber *currentSessionID = [NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:kCurrentSession] integerValue]];
+        if ([deleteSessionID isEqualToNumber:currentSessionID]) {
+            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kCurrentSession];
+        }
         session = [DataHelper getAllSessionsWithStatus:nil InContext:_managedObjectContext];
         [_tv reloadData];
         

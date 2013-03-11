@@ -185,12 +185,14 @@
         [sessionIdList addObject:session];
     }
     
+//    NSString *testString = @"[{\"userId\":\"1\",\"sessionId\":\"2\"},{\"userId\":\"2\",\"sessionId\":\"2\"},{\"userId\":\"3\",\"sessionId\":\"2\"}]";
     NSURL *url = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:kServerSetting]];
     //[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, UPLOAD_URI]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_ID];
     [request setPostValue:@"admin" forKey:PARAM_NAME_ACCOUNT_PASSWORD];
     [request setPostValue:[jsonList JSONString] forKey:PARAM_NAME_JSON_LIST];
+//    [request setPostValue:testString forKey:PARAM_NAME_JSON_LIST];
     [request startSynchronous];
     
     NSError *error = [request error];
@@ -198,7 +200,7 @@
     
     if(!error)
     {
-        NSString *response = [request responseString];
+        NSString *response = [[request responseString] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
 //        NSString *successResult = @"{\"status\": \"success\", \"data\": [{\"staffId\":\"300999\",\"sessionId\":\"2\"},{\"staffId\":\"300888\",\"sessionId\":\"2\"},{\"staffId\":\"300777\",\"sessionId\":\"2\"}]}";
 //        NSString *failureResult = @"{\"status\": \"failure\", \"data\": [{\"staffId\":\"300999\",\"sessionId\":\"2\"},{\"staffId\":\"300888\",\"sessionId\":\"2\"},{\"staffId\":\"300777\",\"sessionId\":\"2\"}], \"error\": \"invalid syntax (<string>, line 1)\"}";
         
