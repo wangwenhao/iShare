@@ -8,6 +8,8 @@
 
 #import "SessionListViewController.h"
 #import "SessionViewCell.h"
+#import "JSONKit.h"
+#import "TempJson.h"
 
 @interface SessionListViewController ()
 
@@ -74,10 +76,16 @@
 {
     
     //Hardcode here.
-    NSDictionary *session1 = [NSDictionary dictionaryWithObjectsAndKeys:@".NET MVC4", @"SessionName", @"张三", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
-    NSDictionary *session2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Java", @"SessionName", @"李四", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
-    NSDictionary *session3 = [NSDictionary dictionaryWithObjectsAndKeys:@"iOS", @"SessionName", @"王五", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
-    _sessionList = [NSArray arrayWithObjects: session1, session2, session3, nil];
+    
+    NSString *jsonString = SessionListJson;
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    _sessionList = [jsonData objectFromJSONData];
+    
+//    NSDictionary *session1 = [NSDictionary dictionaryWithObjectsAndKeys:@".NET MVC4", @"SessionName", @"张三", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
+//    NSDictionary *session2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Java", @"SessionName", @"李四", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
+//    NSDictionary *session3 = [NSDictionary dictionaryWithObjectsAndKeys:@"iOS", @"SessionName", @"王五", @"Lecturer", @"2013-9-18 13:30", @"SessionTime", nil];
+//    _sessionList = [NSArray arrayWithObjects: session1, session2, session3, nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,9 +123,9 @@
     }
     
     // Configure the cell...
-    cell.sessionName.text = [((NSDictionary *)[_sessionList objectAtIndex:indexPath.row]) objectForKey:@"SessionName"];
-    cell.lecturer.text = [((NSDictionary *)[_sessionList objectAtIndex:indexPath.row]) objectForKey:@"Lecturer"];
-    cell.sessionTime.text = [((NSDictionary *)[_sessionList objectAtIndex:indexPath.row]) objectForKey:@"SessionTime"];
+    cell.sessionName.text = [[_sessionList objectAtIndex:indexPath.row] objectForKey:@"sessionname"];
+    cell.lecturer.text = [[_sessionList objectAtIndex:indexPath.row] objectForKey:@"lecture"];
+    cell.sessionTime.text = [[_sessionList objectAtIndex:indexPath.row] objectForKey:@"starttime"];
     
     return cell;
 }

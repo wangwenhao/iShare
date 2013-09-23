@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B52571E416E61AB600DF547B /* ConnectToIShare.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571E116E6196800DF547B /* ConnectToIShare.m */; };
-		B52571E516E61AB600DF547B /* InvokeServerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571E316E6196800DF547B /* InvokeServerModel.m */; };
 		B52571FD16E623DA00DF547B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571E816E623DA00DF547B /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B52571FE16E623DA00DF547B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571EB16E623DA00DF547B /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B52571FF16E623DA00DF547B /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B52571ED16E623DA00DF547B /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -82,10 +80,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B52571E016E6196800DF547B /* ConnectToIShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectToIShare.h; sourceTree = "<group>"; };
-		B52571E116E6196800DF547B /* ConnectToIShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectToIShare.m; sourceTree = "<group>"; };
-		B52571E216E6196800DF547B /* InvokeServerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvokeServerModel.h; sourceTree = "<group>"; };
-		B52571E316E6196800DF547B /* InvokeServerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvokeServerModel.m; sourceTree = "<group>"; };
 		B52571E716E623DA00DF547B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		B52571E816E623DA00DF547B /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		B52571E916E623DA00DF547B /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -189,6 +183,7 @@
 		B5895A2716D65BE90073FAE6 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		B5895A2816D65BE90073FAE6 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		B5895A2916D65BE90073FAE6 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
+		B58CFFAB17F0977400326CB5 /* TempJson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TempJson.h; sourceTree = "<group>"; };
 		B5B7E4EF16DE32FE00DBB201 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		B5B7E4F016DE32FE00DBB201 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		B5CA093216E379A600CDD0E1 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIcon.png; path = ../AppIcon.png; sourceTree = "<group>"; };
@@ -240,17 +235,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B52571DF16E6194400DF547B /* iShareService */ = {
-			isa = PBXGroup;
-			children = (
-				B52571E016E6196800DF547B /* ConnectToIShare.h */,
-				B52571E116E6196800DF547B /* ConnectToIShare.m */,
-				B52571E216E6196800DF547B /* InvokeServerModel.h */,
-				B52571E316E6196800DF547B /* InvokeServerModel.m */,
-			);
-			name = iShareService;
-			sourceTree = "<group>";
-		};
 		B52571E616E623DA00DF547B /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,20 +269,11 @@
 			children = (
 				B55F8D5F16D3ADB200870665 /* Supporting Files */,
 				B5D9666A16DBAA38009F1204 /* da.wav */,
-				B54406E617E855A6005C869B /* LoginViewController.xib */,
-				B55F8D7A16D3AF6A00870665 /* MainView.xib */,
-				B5895A2416D64D450073FAE6 /* SessionHistoryListView.xib */,
-				B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */,
-				B5895A2916D65BE90073FAE6 /* SettingView.xib */,
-				B5EF96DE16DB8A6000C4D8CB /* SessionScanView.xib */,
-				B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */,
-				B573B29616DF880B00E69CBF /* SessionInfoPreviewView.xib */,
-				B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		B53970C416DCE49600CE490C /* DataModels */ = {
+		B53970C416DCE49600CE490C /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				B55F8D7016D3ADB200870665 /* iShare.xcdatamodeld */,
@@ -307,7 +282,7 @@
 				B53970BA16DCE03000CE490C /* AudienceModel.h */,
 				B53970BB16DCE03000CE490C /* AudienceModel.m */,
 			);
-			name = DataModels;
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		B55F8D4A16D3ADB200870665 = {
@@ -351,49 +326,13 @@
 		B55F8D5E16D3ADB200870665 /* iShare */ = {
 			isa = PBXGroup;
 			children = (
+				B58CFFAA17F0876C00326CB5 /* Common */,
+				B58CFFA917F0806100326CB5 /* Classes */,
 				B52571E616E623DA00DF547B /* ASIHTTPRequest */,
-				B52571DF16E6194400DF547B /* iShareService */,
 				B5B7E4F216DE330400DBB201 /* JSONKit */,
-				B53970C416DCE49600CE490C /* DataModels */,
+				B53970C416DCE49600CE490C /* CoreData */,
 				B53970B716DCDE2700CE490C /* Resources */,
 				B58959FF16D644DD0073FAE6 /* ZBarSDK */,
-				B55F8D6716D3ADB200870665 /* AppDelegate.h */,
-				B55F8D6816D3ADB200870665 /* AppDelegate.m */,
-				B53970BC16DCE04200CE490C /* Constants.h */,
-				B53970BD16DCE04200CE490C /* DataHelper.h */,
-				B53970BE16DCE04200CE490C /* DataHelper.m */,
-				B55F8D7816D3AF6A00870665 /* MainViewController.h */,
-				B55F8D7916D3AF6A00870665 /* MainViewController.m */,
-				B5895A2216D64D450073FAE6 /* SessionHistoryListViewController.h */,
-				B5895A2316D64D450073FAE6 /* SessionHistoryListViewController.m */,
-				B5CA09A816E4D09300CDD0E1 /* SessionDetailsViewController.h */,
-				B5CA09A916E4D09300CDD0E1 /* SessionDetailsViewController.m */,
-				B5895A2716D65BE90073FAE6 /* SettingViewController.h */,
-				B5895A2816D65BE90073FAE6 /* SettingViewController.m */,
-				B5EF96DC16DB8A6000C4D8CB /* SessionScanViewController.h */,
-				B5EF96DD16DB8A6000C4D8CB /* SessionScanViewController.m */,
-				B573B29416DF880A00E69CBF /* SessionInfoPreviewViewController.h */,
-				B573B29516DF880A00E69CBF /* SessionInfoPreviewViewController.m */,
-				B5D9666116DB9BD2009F1204 /* CheckinScanViewController.h */,
-				B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */,
-				B5CA093616E38D8900CDD0E1 /* KeyinStaffIDViewController.h */,
-				B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */,
-				B573B29916DF8C6800E69CBF /* UILabel+VerticalAlign.h */,
-				B573B29A16DF8C6800E69CBF /* UILabel+VerticalAlign.m */,
-				B54406E417E855A6005C869B /* LoginViewController.h */,
-				B54406E517E855A6005C869B /* LoginViewController.m */,
-				B54406E917E859F9005C869B /* SessionListViewController.h */,
-				B54406EA17E859F9005C869B /* SessionListViewController.m */,
-				B54406EB17E859F9005C869B /* SessionListViewController.xib */,
-				B54406EE17E85FAD005C869B /* SessionViewCell.h */,
-				B54406EF17E85FAD005C869B /* SessionViewCell.m */,
-				B54406F117E86046005C869B /* SessionViewCell.xib */,
-				B54406F317E88975005C869B /* MySessionViewController.h */,
-				B54406F417E88975005C869B /* MySessionViewController.m */,
-				B54406F517E88976005C869B /* MySessionViewController.xib */,
-				B54406F817E88C8A005C869B /* SessionPreviewController.h */,
-				B54406F917E88C8B005C869B /* SessionPreviewController.m */,
-				B54406FA17E88C8C005C869B /* SessionPreviewController.xib */,
 			);
 			path = iShare;
 			sourceTree = "<group>";
@@ -477,6 +416,67 @@
 				B5895A1C16D644DD0073FAE6 /* zbar-samples.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B58CFFA917F0806100326CB5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B55F8D6716D3ADB200870665 /* AppDelegate.h */,
+				B55F8D6816D3ADB200870665 /* AppDelegate.m */,
+				B54406E417E855A6005C869B /* LoginViewController.h */,
+				B54406E517E855A6005C869B /* LoginViewController.m */,
+				B54406E617E855A6005C869B /* LoginViewController.xib */,
+				B55F8D7816D3AF6A00870665 /* MainViewController.h */,
+				B55F8D7916D3AF6A00870665 /* MainViewController.m */,
+				B55F8D7A16D3AF6A00870665 /* MainView.xib */,
+				B5895A2416D64D450073FAE6 /* SessionHistoryListView.xib */,
+				B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */,
+				B5895A2916D65BE90073FAE6 /* SettingView.xib */,
+				B5EF96DE16DB8A6000C4D8CB /* SessionScanView.xib */,
+				B5D9666316DB9BD2009F1204 /* CheckinScanView.xib */,
+				B573B29616DF880B00E69CBF /* SessionInfoPreviewView.xib */,
+				B5CA093816E38D8A00CDD0E1 /* KeyinStaffIDView.xib */,
+				B5895A2216D64D450073FAE6 /* SessionHistoryListViewController.h */,
+				B5895A2316D64D450073FAE6 /* SessionHistoryListViewController.m */,
+				B5CA09A816E4D09300CDD0E1 /* SessionDetailsViewController.h */,
+				B5CA09A916E4D09300CDD0E1 /* SessionDetailsViewController.m */,
+				B5895A2716D65BE90073FAE6 /* SettingViewController.h */,
+				B5895A2816D65BE90073FAE6 /* SettingViewController.m */,
+				B5EF96DC16DB8A6000C4D8CB /* SessionScanViewController.h */,
+				B5EF96DD16DB8A6000C4D8CB /* SessionScanViewController.m */,
+				B573B29416DF880A00E69CBF /* SessionInfoPreviewViewController.h */,
+				B573B29516DF880A00E69CBF /* SessionInfoPreviewViewController.m */,
+				B5D9666116DB9BD2009F1204 /* CheckinScanViewController.h */,
+				B5D9666216DB9BD2009F1204 /* CheckinScanViewController.m */,
+				B5CA093616E38D8900CDD0E1 /* KeyinStaffIDViewController.h */,
+				B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */,
+				B573B29916DF8C6800E69CBF /* UILabel+VerticalAlign.h */,
+				B573B29A16DF8C6800E69CBF /* UILabel+VerticalAlign.m */,
+				B54406E917E859F9005C869B /* SessionListViewController.h */,
+				B54406EA17E859F9005C869B /* SessionListViewController.m */,
+				B54406EB17E859F9005C869B /* SessionListViewController.xib */,
+				B54406EE17E85FAD005C869B /* SessionViewCell.h */,
+				B54406EF17E85FAD005C869B /* SessionViewCell.m */,
+				B54406F117E86046005C869B /* SessionViewCell.xib */,
+				B54406F317E88975005C869B /* MySessionViewController.h */,
+				B54406F417E88975005C869B /* MySessionViewController.m */,
+				B54406F517E88976005C869B /* MySessionViewController.xib */,
+				B54406F817E88C8A005C869B /* SessionPreviewController.h */,
+				B54406F917E88C8B005C869B /* SessionPreviewController.m */,
+				B54406FA17E88C8C005C869B /* SessionPreviewController.xib */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		B58CFFAA17F0876C00326CB5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B53970BC16DCE04200CE490C /* Constants.h */,
+				B53970BD16DCE04200CE490C /* DataHelper.h */,
+				B53970BE16DCE04200CE490C /* DataHelper.m */,
+				B58CFFAB17F0977400326CB5 /* TempJson.h */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		B5B7E4F216DE330400DBB201 /* JSONKit */ = {
@@ -574,8 +574,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B52571E416E61AB600DF547B /* ConnectToIShare.m in Sources */,
-				B52571E516E61AB600DF547B /* InvokeServerModel.m in Sources */,
 				B53970C216DCE21500CE490C /* SessionModel.m in Sources */,
 				B53970C316DCE21500CE490C /* AudienceModel.m in Sources */,
 				B53970C116DCE1FE00CE490C /* DataHelper.m in Sources */,

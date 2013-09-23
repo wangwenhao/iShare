@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     self.title = @"iShare";
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     UIBarButtonItem *settingButton = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStyleBordered target:self action:@selector(settingButtonTapped:)];
     self.navigationItem.rightBarButtonItem = settingButton;
     // Do any additional setup after loading the view from its nib.
