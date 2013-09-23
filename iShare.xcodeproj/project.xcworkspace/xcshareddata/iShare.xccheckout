@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9F5B9CD6-E94F-4D76-8D04-6BF45BA61FB9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iShare</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C4C08D8F-5086-4096-8799-A9750D3309C9</key>
+		<string>https://github.com/wangwenhao/iShare.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iShare.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C4C08D8F-5086-4096-8799-A9750D3309C9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/wangwenhao/iShare.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C4C08D8F-5086-4096-8799-A9750D3309C9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C4C08D8F-5086-4096-8799-A9750D3309C9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iShare</string>
+		</dict>
+	</array>
+</dict>
+</plist>

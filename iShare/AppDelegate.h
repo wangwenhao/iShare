@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) MainViewController *mainViewController;
+@property (strong, nonatomic) LoginViewController *mainViewController;
 @property (strong, nonatomic) UINavigationController *navigationController;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

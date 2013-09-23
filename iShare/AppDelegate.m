@@ -27,7 +27,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.mainViewController = [[MainViewController alloc]initWithNibName:@"MainView" bundle:nil];
+    self.mainViewController = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     self.mainViewController.title = @"iShare";
     self.navigationController = [[UINavigationController alloc]initWithRootViewController:self.mainViewController];
     self.window.rootViewController = self.navigationController;

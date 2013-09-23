@@ -26,6 +26,16 @@
 		B53970C216DCE21500CE490C /* SessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970B916DCE00200CE490C /* SessionModel.m */; };
 		B53970C316DCE21500CE490C /* AudienceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53970BB16DCE03000CE490C /* AudienceModel.m */; };
 		B53970C616DCE6F200CE490C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B53970C516DCE6F200CE490C /* Settings.bundle */; };
+		B54406E717E855A7005C869B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54406E517E855A6005C869B /* LoginViewController.m */; };
+		B54406E817E855A7005C869B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54406E617E855A6005C869B /* LoginViewController.xib */; };
+		B54406EC17E859F9005C869B /* SessionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54406EA17E859F9005C869B /* SessionListViewController.m */; };
+		B54406ED17E859F9005C869B /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54406EB17E859F9005C869B /* SessionListViewController.xib */; };
+		B54406F017E85FAE005C869B /* SessionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54406EF17E85FAD005C869B /* SessionViewCell.m */; };
+		B54406F217E86047005C869B /* SessionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54406F117E86046005C869B /* SessionViewCell.xib */; };
+		B54406F617E88977005C869B /* MySessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54406F417E88975005C869B /* MySessionViewController.m */; };
+		B54406F717E88977005C869B /* MySessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54406F517E88976005C869B /* MySessionViewController.xib */; };
+		B54406FB17E88C8D005C869B /* SessionPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54406F917E88C8B005C869B /* SessionPreviewController.m */; };
+		B54406FC17E88C8D005C869B /* SessionPreviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54406FA17E88C8C005C869B /* SessionPreviewController.xib */; };
 		B55F8D5716D3ADB200870665 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5616D3ADB200870665 /* UIKit.framework */; };
 		B55F8D5916D3ADB200870665 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5816D3ADB200870665 /* Foundation.framework */; };
 		B55F8D5B16D3ADB200870665 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55F8D5A16D3ADB200870665 /* CoreGraphics.framework */; };
@@ -110,6 +120,21 @@
 		B53970BD16DCE04200CE490C /* DataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataHelper.h; sourceTree = "<group>"; };
 		B53970BE16DCE04200CE490C /* DataHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataHelper.m; sourceTree = "<group>"; };
 		B53970C516DCE6F200CE490C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		B54406E417E855A6005C869B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B54406E517E855A6005C869B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B54406E617E855A6005C869B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		B54406E917E859F9005C869B /* SessionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionListViewController.h; sourceTree = "<group>"; };
+		B54406EA17E859F9005C869B /* SessionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionListViewController.m; sourceTree = "<group>"; };
+		B54406EB17E859F9005C869B /* SessionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
+		B54406EE17E85FAD005C869B /* SessionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewCell.h; sourceTree = "<group>"; };
+		B54406EF17E85FAD005C869B /* SessionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewCell.m; sourceTree = "<group>"; };
+		B54406F117E86046005C869B /* SessionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionViewCell.xib; sourceTree = "<group>"; };
+		B54406F317E88975005C869B /* MySessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySessionViewController.h; sourceTree = "<group>"; };
+		B54406F417E88975005C869B /* MySessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySessionViewController.m; sourceTree = "<group>"; };
+		B54406F517E88976005C869B /* MySessionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySessionViewController.xib; sourceTree = "<group>"; };
+		B54406F817E88C8A005C869B /* SessionPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionPreviewController.h; sourceTree = "<group>"; };
+		B54406F917E88C8B005C869B /* SessionPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionPreviewController.m; sourceTree = "<group>"; };
+		B54406FA17E88C8C005C869B /* SessionPreviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionPreviewController.xib; sourceTree = "<group>"; };
 		B55F8D5316D3ADB200870665 /* iShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55F8D5616D3ADB200870665 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B55F8D5816D3ADB200870665 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -260,6 +285,7 @@
 			children = (
 				B55F8D5F16D3ADB200870665 /* Supporting Files */,
 				B5D9666A16DBAA38009F1204 /* da.wav */,
+				B54406E617E855A6005C869B /* LoginViewController.xib */,
 				B55F8D7A16D3AF6A00870665 /* MainView.xib */,
 				B5895A2416D64D450073FAE6 /* SessionHistoryListView.xib */,
 				B5CA09AA16E4D09400CDD0E1 /* SessionDetailsView.xib */,
@@ -354,6 +380,20 @@
 				B5CA093716E38D8900CDD0E1 /* KeyinStaffIDViewController.m */,
 				B573B29916DF8C6800E69CBF /* UILabel+VerticalAlign.h */,
 				B573B29A16DF8C6800E69CBF /* UILabel+VerticalAlign.m */,
+				B54406E417E855A6005C869B /* LoginViewController.h */,
+				B54406E517E855A6005C869B /* LoginViewController.m */,
+				B54406E917E859F9005C869B /* SessionListViewController.h */,
+				B54406EA17E859F9005C869B /* SessionListViewController.m */,
+				B54406EB17E859F9005C869B /* SessionListViewController.xib */,
+				B54406EE17E85FAD005C869B /* SessionViewCell.h */,
+				B54406EF17E85FAD005C869B /* SessionViewCell.m */,
+				B54406F117E86046005C869B /* SessionViewCell.xib */,
+				B54406F317E88975005C869B /* MySessionViewController.h */,
+				B54406F417E88975005C869B /* MySessionViewController.m */,
+				B54406F517E88976005C869B /* MySessionViewController.xib */,
+				B54406F817E88C8A005C869B /* SessionPreviewController.h */,
+				B54406F917E88C8B005C869B /* SessionPreviewController.m */,
+				B54406FA17E88C8C005C869B /* SessionPreviewController.xib */,
 			);
 			path = iShare;
 			sourceTree = "<group>";
@@ -519,6 +559,11 @@
 				B5CA093516E379B000CDD0E1 /* AppIcon@2x.png in Resources */,
 				B5CA093A16E38D8A00CDD0E1 /* KeyinStaffIDView.xib in Resources */,
 				B5CA09AC16E4D09500CDD0E1 /* SessionDetailsView.xib in Resources */,
+				B54406E817E855A7005C869B /* LoginViewController.xib in Resources */,
+				B54406ED17E859F9005C869B /* SessionListViewController.xib in Resources */,
+				B54406F217E86047005C869B /* SessionViewCell.xib in Resources */,
+				B54406F717E88977005C869B /* MySessionViewController.xib in Resources */,
+				B54406FC17E88C8D005C869B /* SessionPreviewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +601,11 @@
 				B525720316E623DA00DF547B /* ASIInputStream.m in Sources */,
 				B525720416E623DA00DF547B /* ASINetworkQueue.m in Sources */,
 				B525720516E623DA00DF547B /* Reachability.m in Sources */,
+				B54406E717E855A7005C869B /* LoginViewController.m in Sources */,
+				B54406EC17E859F9005C869B /* SessionListViewController.m in Sources */,
+				B54406F017E85FAE005C869B /* SessionViewCell.m in Sources */,
+				B54406F617E88977005C869B /* MySessionViewController.m in Sources */,
+				B54406FB17E88C8D005C869B /* SessionPreviewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +691,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iShare/iShare-Prefix.pch";
 				INFOPLIST_FILE = "iShare/iShare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iShare/ZBarSDK\"",
@@ -649,7 +700,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.0;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -663,6 +714,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iShare/iShare-Prefix.pch";
 				INFOPLIST_FILE = "iShare/iShare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iShare/ZBarSDK\"",
@@ -670,7 +722,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.0;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
